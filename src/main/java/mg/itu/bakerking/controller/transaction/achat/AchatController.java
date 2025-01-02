@@ -1,9 +1,9 @@
 package mg.itu.bakerking.controller.transaction.achat;
 
 import mg.itu.bakerking.controller.affichage.Dispatcher;
-import mg.itu.bakerking.dto.AchatDTO;
-import mg.itu.bakerking.entity.transaction.achat.Achat;
+import mg.itu.bakerking.dto.transaction.AchatDTO;
 import mg.itu.bakerking.service.produit.IngredientService;
+import mg.itu.bakerking.service.transaction.achat.AchatService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,8 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class AchatController {
     private final IngredientService ingredientService;
 
-    public AchatController(IngredientService ingredientService) {
+    private final AchatService achatService;
+
+    public AchatController(IngredientService ingredientService, AchatService achatService) {
         this.ingredientService = ingredientService;
+        this.achatService = achatService;
     }
 
     @GetMapping("/form")
@@ -27,6 +30,12 @@ public class AchatController {
 
     @PostMapping
     public String save(@ModelAttribute AchatDTO achat){
-        return achat.getIngredients().get(0);
+        try{
+            this.achatService.save(achat);
+        }
+        catch (Exception ex){
+            throw ex;
+        }
+        return "redirect:/achat";
     }
 }
