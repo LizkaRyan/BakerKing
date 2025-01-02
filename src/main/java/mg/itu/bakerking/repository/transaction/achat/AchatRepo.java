@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AchatRepo extends JpaRepository<Achat,String> {
+    @Query(value = "select nextval('seq_achat')",nativeQuery = true)
+    public Long findId();
 }

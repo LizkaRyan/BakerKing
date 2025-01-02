@@ -17,9 +17,12 @@ public class AchatService {
 
     private final IngredientService ingredientService;
 
-    public AchatService(AchatRepo repo, IngredientService ingredientService) {
+    private final AchatDetailsService achatDetailsService;
+
+    public AchatService(AchatRepo repo, IngredientService ingredientService, AchatDetailsService achatDetailsService) {
         this.repo = repo;
         this.ingredientService = ingredientService;
+        this.achatDetailsService = achatDetailsService;
     }
 
     public Achat save(AchatDTO achatDTO){
@@ -28,6 +31,7 @@ public class AchatService {
         for (IngredientDTO ingredientDTO:achatDTO.getIngredients()) {
             Ingredient ingredient=ingredientService.getRepo().findById(ingredientDTO.getIdIngredient()).orElseThrow(()->new RuntimeException("Id Ingredient:"+ingredientDTO.getIdIngredient()+" non retrouve"));
             AchatDetails achatDetails=new AchatDetails(ingredient, ingredientDTO.getQuantite());
+            achatDetailsService.setId(achatDetails);
             achat.addAchatDetails(achatDetails);
         }
         return this.repo.save(achat);

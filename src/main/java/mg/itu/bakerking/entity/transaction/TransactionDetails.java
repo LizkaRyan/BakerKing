@@ -10,7 +10,6 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class TransactionDetails {
     @Id
-    @GeneratedValue
     private String idDetails;
 
     private double quantite;

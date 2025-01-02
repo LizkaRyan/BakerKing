@@ -3,6 +3,7 @@ package mg.itu.bakerking.entity.transaction.achat;
 import jakarta.persistence.*;
 import lombok.*;
 import mg.itu.bakerking.entity.transaction.Transaction;
+import mg.itu.bakerking.listener.AchatListener;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,9 +13,9 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@EntityListeners(AchatListener.class)
 public class Achat extends Transaction {
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_achat_details")
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "achat")
     @Getter(AccessLevel.PROTECTED)
     protected List<AchatDetails> achatDetails=new ArrayList<AchatDetails>();
 
@@ -32,6 +33,7 @@ public class Achat extends Transaction {
 
     public void addAchatDetails(AchatDetails achatDetails){
         this.achatDetails.add(achatDetails);
+        achatDetails.setAchat(this);
         this.setMontant(this.getMontant()+ achatDetails.getMontant());
     }
 

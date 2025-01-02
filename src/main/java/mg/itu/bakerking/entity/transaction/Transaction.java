@@ -14,7 +14,6 @@ import java.time.LocalDate;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Transaction {
     @Id
-    @GeneratedValue
     private String idTransaction;
 
     private double montant=0;
