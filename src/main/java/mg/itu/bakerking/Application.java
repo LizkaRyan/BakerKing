@@ -1,4 +1,4 @@
-package mg.itu.BakerKing;
+package mg.itu.bakerking;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

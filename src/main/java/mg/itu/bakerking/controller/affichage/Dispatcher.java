@@ -1,4 +1,4 @@
-package mg.itu.BakerKing.controller.affichage;
+package mg.itu.bakerking.controller.affichage;
 
 import org.springframework.web.servlet.ModelAndView;
 

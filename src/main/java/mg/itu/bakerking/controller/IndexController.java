@@ -1,6 +1,6 @@
-package mg.itu.BakerKing.controller;
+package mg.itu.bakerking.controller;
 
-import mg.itu.BakerKing.controller.affichage.Dispatcher;
+import mg.itu.bakerking.controller.affichage.Dispatcher;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
