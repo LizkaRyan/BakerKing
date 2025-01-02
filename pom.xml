@@ -12,7 +12,7 @@
 	<artifactId>itu</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>itu.BakerKing</name>
+	<name>BakerKing</name>
 	<description>Application de gestion de boulangerie</description>
 	<url/>
 	<licenses>
