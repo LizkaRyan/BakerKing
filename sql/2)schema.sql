@@ -13,17 +13,17 @@ CREATE TABLE categorie(
 );
 
 CREATE TABLE vente(
-                      id_vente VARCHAR(100) default 'VNT00'||nextval('seq_vente'),
-                      date_vente DATE NOT NULL,
+                      id_transaction VARCHAR(100) default 'VNT00'||nextval('seq_vente'),
                       montant DECIMAL(15,2) NOT NULL,
-                      PRIMARY KEY(id_vente)
+                      date_transaction DATE NOT NULL,
+                      PRIMARY KEY(id_transaction)
 );
 
 CREATE TABLE achat(
-                      id_achat VARCHAR(100) default 'ACH00'||nextval('seq_achat'),
+                      id_transaction VARCHAR(100) default 'ACH00'||nextval('seq_achat'),
                       montant DECIMAL(15,2) NOT NULL,
-                      date_achat DATE NOT NULL,
-                      PRIMARY KEY(id_achat)
+                      date_transaction DATE NOT NULL,
+                      PRIMARY KEY(id_transaction)
 );
 
 CREATE TABLE ingredient(
@@ -72,10 +72,10 @@ CREATE TABLE vente_details(
                               id_details VARCHAR(50) default 'VTD00'||nextval('seq_vente_details'),
                               quantite INT NOT NULL,
                               montant DECIMAL(15,2) NOT NULL,
-                              id_vente VARCHAR(100) NOT NULL,
+                              id_transaction VARCHAR(100) NOT NULL,
                               id_produit VARCHAR(100) NOT NULL,
                               PRIMARY KEY(id_details),
-                              FOREIGN KEY(id_vente) REFERENCES vente(id_vente),
+                              FOREIGN KEY(id_transaction) REFERENCES vente(id_transaction),
                               FOREIGN KEY(id_produit) REFERENCES produit(id_produit)
 );
 
@@ -83,10 +83,10 @@ CREATE TABLE achat_details(
                               id_details VARCHAR(100) default 'ACD00'||nextval('seq_achat_details'),
                               quantite DECIMAL(15,2) NOT NULL,
                               montant DECIMAL(15,2) NOT NULL,
-                              id_achat VARCHAR(100) NOT NULL,
+                              id_transaction VARCHAR(100) NOT NULL,
                               id_ingredient VARCHAR(100) NOT NULL,
                               PRIMARY KEY(id_details),
-                              FOREIGN KEY(id_achat) REFERENCES achat(id_achat),
+                              FOREIGN KEY(id_transaction) REFERENCES achat(id_transaction),
                               FOREIGN KEY(id_ingredient) REFERENCES ingredient(id_ingredient)
 );
 
