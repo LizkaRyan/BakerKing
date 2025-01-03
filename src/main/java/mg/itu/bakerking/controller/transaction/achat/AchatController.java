@@ -38,4 +38,9 @@ public class AchatController {
         }
         return "redirect:/achat";
     }
+
+    @GetMapping
+    public ModelAndView index(){
+        return new Dispatcher("stock/index.jsp");
+    }
 }

@@ -8,6 +8,7 @@ import mg.itu.bakerking.entity.transaction.achat.Achat;
 import mg.itu.bakerking.entity.transaction.achat.AchatDetails;
 import mg.itu.bakerking.repository.transaction.achat.AchatRepo;
 import mg.itu.bakerking.service.produit.IngredientService;
+import mg.itu.bakerking.service.stock.MvtStockIngredientService;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,10 +20,13 @@ public class AchatService {
 
     private final AchatDetailsService achatDetailsService;
 
-    public AchatService(AchatRepo repo, IngredientService ingredientService, AchatDetailsService achatDetailsService) {
+    private final MvtStockIngredientService mvtStockIngredientService;
+
+    public AchatService(AchatRepo repo, IngredientService ingredientService, AchatDetailsService achatDetailsService, MvtStockIngredientService mvtStockIngredientService) {
         this.repo = repo;
         this.ingredientService = ingredientService;
         this.achatDetailsService = achatDetailsService;
+        this.mvtStockIngredientService = mvtStockIngredientService;
     }
 
     public Achat save(AchatDTO achatDTO){
@@ -31,6 +35,8 @@ public class AchatService {
         for (IngredientDTO ingredientDTO:achatDTO.getIngredients()) {
             Ingredient ingredient=ingredientService.getRepo().findById(ingredientDTO.getIdIngredient()).orElseThrow(()->new RuntimeException("Id Ingredient:"+ingredientDTO.getIdIngredient()+" non retrouve"));
             AchatDetails achatDetails=new AchatDetails(ingredient, ingredientDTO.getQuantite());
+
+            mvtStockIngredientService.save(ingredient, ingredientDTO.getQuantite(), achatDTO.getDateTransaction());
             achatDetailsService.setId(achatDetails);
             achat.addAchatDetails(achatDetails);
         }
