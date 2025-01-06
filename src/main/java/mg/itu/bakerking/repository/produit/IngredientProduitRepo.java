@@ -11,5 +11,5 @@ import java.util.List;
 
 public interface IngredientProduitRepo extends JpaRepository<IngredientProduit, IdIngredientProduit> {
     @Query(value = "select * from ingredient_produit where id_produit=:idProduit", nativeQuery = true)
-    public List<IngredientProduit> ingPro(@Param("idProduit") String idProduit);
+    public List<IngredientProduit> findByIdProduit(@Param("idProduit") String idProduit);
 }

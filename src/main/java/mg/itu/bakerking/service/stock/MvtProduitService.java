@@ -1,6 +1,6 @@
 package mg.itu.bakerking.service.stock;
 
-import mg.itu.bakerking.dto.stock.MvtStockDTO;
+import mg.itu.bakerking.dto.produit.ProduitDTO;
 import mg.itu.bakerking.entity.produit.IngredientProduit;
 import mg.itu.bakerking.entity.stock.MvtStockProduit;
 import mg.itu.bakerking.repository.produit.IngredientProduitRepo;
@@ -23,11 +23,16 @@ public class MvtProduitService {
         this.produitrepo = produitrepo;
     }
 
-    public void save(List<MvtStockDTO> stock) {
-        for (MvtStockDTO m: stock) {
-            List<IngredientProduit> ingpro = ingrepo.ingPro(m.getIdProduit());
+    public boolean isAvailable(String idProduit,double quantite){
+        Double quantiteStock=repo.findEtatStock(idProduit).orElseThrow(()->new RuntimeException("Id Produit non reconnue"));
+        return quantiteStock>=quantite;
+    }
+
+    public void save(List<ProduitDTO> stock) {
+        for (ProduitDTO m: stock) {
+            List<IngredientProduit> ingpro = ingrepo.findByIdProduit(m.getIdProduit());
             for (IngredientProduit i: ingpro) {
-                /*if (repo.quantiteFinal(i.getIngredient().getIdIngredient()) < i.getQuantite()* m.getQuantite()){
+                /*if (repo.findEtatStock(i.getIngredient().getIdIngredient()) < i.getQuantite()* m.getQuantite()){
                     throw new RuntimeException("Stock insuffisant");
                 }*/
             }

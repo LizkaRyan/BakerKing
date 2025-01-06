@@ -9,5 +9,6 @@ public interface MvtStockIngredientRepo extends JpaRepository<MvtStockIngredient
     @Query(value = "select nextval('seq_mvt_stock_ingredient')",nativeQuery = true)
     public Long findId();
 
-
+    @Query(value = "select SUM(entree-sortie) as s from mvt_stock_ingredient where id_ingredient=:idIngredient", nativeQuery = true)
+    public double findEtatStock(@Param("idIngredient") String idIngredient);
 }

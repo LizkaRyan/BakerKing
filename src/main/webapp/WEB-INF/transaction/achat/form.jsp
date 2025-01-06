@@ -23,7 +23,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <select name="ingredients[0].idIngredient" class="form-select" aria-label="Default select example">
-                                    <option selected>Open this select menu</option>
+                                    <option selected>Ingredients</option>
                                     <% for (Ingredient ingredient:ingredients) { %>
                                     <option value="<%= ingredient.getIdIngredient() %>"><%= ingredient.getIngredient() %></option>
                                     <% } %>

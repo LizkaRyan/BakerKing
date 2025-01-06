@@ -1,6 +1,6 @@
-<%@ page import="java.util.List" %>
-<%@ page import="mg.itu.bakerking.entity.produit.Produit" %><%
-    List<Produit> produits=(List<Produit>)request.getAttribute("produits");
+<%@ page import="mg.itu.bakerking.entity.produit.Ingredient" %>
+<%@ page import="java.util.List" %><%
+    List<Ingredient> ingredients=(List<Ingredient>)request.getAttribute("ingredients");
 %>
 <div class="row">
     <div class="col-md-2">
@@ -10,11 +10,11 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Insertion achats</h4>
-                <form action="/produit" method="post">
+                <form action="/vente" method="post">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-floating mb-3">
-                                <input type="date" name="date" class="form-control" id="floatingInput" placeholder="Date achat">
+                                <input type="date" name="dateTransaction" class="form-control" id="floatingInput" placeholder="Date achat">
                                 <label for="floatingInput">Date achat</label>
                             </div>
                         </div>
@@ -22,16 +22,16 @@
                     <div id="achatDetails">
                         <div class="row">
                             <div class="col-md-6">
-                                <select name="stockDTO[0].idProduit" class="form-select" aria-label="Default select example">
-                                    <option selected>Produits</option>
-                                    <% for (Produit produit:produits) { %>
-                                    <option value="<%= produit.getIdProduit() %>"><%= produit.getProduit() %></option>
+                                <select name="ingredients[0].idIngredient" class="form-select" aria-label="Default select example">
+                                    <option selected>Ingredients</option>
+                                    <% for (Ingredient ingredient:ingredients) { %>
+                                    <option value="<%= ingredient.getIdIngredient() %>"><%= ingredient.getIngredient() %></option>
                                     <% } %>
                                 </select>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <input type="number" name="stockDTO[0].quantite" class="form-control" id="floatingInput" placeholder="Quantite">
+                                    <input type="number" name="ingredients[0].quantite" class="form-control" id="floatingInput" placeholder="Quantite">
                                     <label for="floatingInput">Quantite</label>
                                 </div>
                             </div>
@@ -62,24 +62,22 @@
     var id=1;
     function addDetails(){
         const achatDetail=document.getElementById("achatDetails");
-        achatDetail.innerHTML+=`<div id="achatDetails">
-                        <div class="row">
+        achatDetail.innerHTML+=`<div class="row">
                             <div class="col-md-6">
-                                <select name="stockDTO[`+id+`].idProduit" class="form-select" aria-label="Default select example">
+                                <select name="ingredients[`+id+`].idIngredient" class="form-select" aria-label="Default select example">
                                     <option selected>Open this select menu</option>
-                                    <% for (Produit produit:produits) { %>
-                                    <option value="<%= produit.getIdProduit() %>"><%= produit.getProduit() %></option>
+                                    <% for (Ingredient ingredient:ingredients) { %>
+                                    <option value="<%= ingredient.getIdIngredient() %>"><%= ingredient.getIngredient() %></option>
                                     <% } %>
                                 </select>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <input type="number" name="stockDTO[0].quantite" class="form-control" id="floatingInput" placeholder="Quantite">
+                                    <input type="number" name="ingredients[`+id+`].quantite" class="form-control" id="floatingInput" placeholder="Quantite">
                                     <label for="floatingInput">Quantite</label>
                                 </div>
                             </div>
-                        </div>
-                    </div>`;
+                        </div>`;
         id++;
     }
 </script>

@@ -19,4 +19,8 @@ public class Transaction {
     private double montant=0;
 
     private LocalDate dateTransaction;
+
+    public Transaction(LocalDate dateTransaction){
+        this.setDateTransaction(dateTransaction);
+    }
 }
