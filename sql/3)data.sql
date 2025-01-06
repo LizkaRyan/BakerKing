@@ -22,13 +22,13 @@ INSERT INTO ingredient (ingredient, prix_unitaire, id_unite) VALUES
                                                                  ('Vanille', 3000, 'UNT002');
 
 INSERT INTO produit (produit, prix_unitaire, id_categorie) VALUES
-                                                               ('Baguette', 1.00, 'CAT001'),
-                                                               ('Croissant', 1.50, 'CAT002'),
-                                                               ('Pain au chocolat', 2.00, 'CAT002'),
-                                                               ('Tarte aux pommes', 3.50, 'CAT003'),
-                                                               ('Eclair au chocolat', 4.00, 'CAT003'),
-                                                               ('Café', 1.80, 'CAT004'),
-                                                               ('Thé', 1.50, 'CAT004');
+                                                               ('Baguette', 1000, 'CAT001'),
+                                                               ('Croissant', 1500, 'CAT002'),
+                                                               ('Pain au chocolat', 2000, 'CAT002'),
+                                                               ('Tarte aux pommes', 3050, 'CAT003'),
+                                                               ('Eclair au chocolat', 4000, 'CAT003'),
+                                                               ('Café', 1800, 'CAT004'),
+                                                               ('Thé', 1050, 'CAT004');
 
 INSERT INTO ingredient_produit (id_ingredient, id_produit, quantite) VALUES
                                                                          ('ING001', 'PRD001', 0.5),  -- Farine pour Baguette (500g)

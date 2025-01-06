@@ -24,7 +24,7 @@ public class MvtProduitService {
     }
 
     public boolean isAvailable(String idProduit,double quantite){
-        Double quantiteStock=repo.findEtatStock(idProduit).orElseThrow(()->new RuntimeException("Id Produit non reconnue"));
+        Double quantiteStock=repo.findEtatStock(idProduit).orElse(0d);
         return quantiteStock>=quantite;
     }
 

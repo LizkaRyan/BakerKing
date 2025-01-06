@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mg.itu.bakerking.entity.produit.Ingredient;
-import mg.itu.bakerking.listener.transaction.MvtStockIngredientListener;
+import mg.itu.bakerking.listener.stock.MvtStockIngredientListener;
 
 import java.time.LocalDate;
 

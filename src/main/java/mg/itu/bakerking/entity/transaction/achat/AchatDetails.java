@@ -27,6 +27,6 @@ public class AchatDetails extends TransactionDetails {
     public AchatDetails(Ingredient ingredient,double quantite){
         this.setIngredient(ingredient);
         this.setQuantite(quantite);
-        this.setMontant(ingredient.getPrixUnitaire());
+        this.setPrixUnitaire(ingredient.getPrixUnitaire());
     }
 }

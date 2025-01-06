@@ -16,10 +16,15 @@ public class TransactionDetails {
 
     private double quantite;
 
-    private double montant;
+    private double prixUnitaire;
 
-    public TransactionDetails(double quantite,double montant){
-        this.setMontant(montant);
+    public TransactionDetails(String idDetails,double quantite,double prixUnitaire){
+        this.setIdDetails(idDetails);
+        this.setPrixUnitaire(prixUnitaire);
         this.setQuantite(quantite);
+    }
+
+    public double getMontant(){
+        return this.prixUnitaire*this.quantite;
     }
 }

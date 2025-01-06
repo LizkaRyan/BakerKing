@@ -1,4 +1,4 @@
-package mg.itu.bakerking.listener;
+package mg.itu.bakerking.listener.transaction;
 
 import jakarta.persistence.PrePersist;
 import mg.itu.bakerking.entity.transaction.achat.Achat;

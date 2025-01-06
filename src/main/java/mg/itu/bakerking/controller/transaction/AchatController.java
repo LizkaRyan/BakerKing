@@ -1,5 +1,6 @@
 package mg.itu.bakerking.controller.transaction;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import mg.itu.bakerking.controller.affichage.Dispatcher;
 import mg.itu.bakerking.dto.transaction.AchatDTO;
@@ -26,7 +27,7 @@ public class AchatController {
     }
 
     @PostMapping
-    public String save(@ModelAttribute AchatDTO achat){
+    public String save(@Valid @ModelAttribute AchatDTO achat){
         try{
             this.achatService.save(achat);
         }

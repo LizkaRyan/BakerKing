@@ -3,7 +3,7 @@ package mg.itu.bakerking.entity.stock;
 import jakarta.persistence.*;
 import lombok.Data;
 import mg.itu.bakerking.entity.produit.Produit;
-import mg.itu.bakerking.listener.transaction.MvtStockProduitListener;
+import mg.itu.bakerking.listener.stock.MvtStockProduitListener;
 
 @Entity
 @Data

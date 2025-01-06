@@ -3,7 +3,7 @@ package mg.itu.bakerking.entity.transaction.achat;
 import jakarta.persistence.*;
 import lombok.*;
 import mg.itu.bakerking.entity.transaction.Transaction;
-import mg.itu.bakerking.listener.AchatListener;
+import mg.itu.bakerking.listener.transaction.AchatListener;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class Achat extends Transaction {
     public void addAchatDetails(AchatDetails achatDetails){
         this.achatDetails.add(achatDetails);
         achatDetails.setAchat(this);
-        this.setMontant(this.getMontant()+ achatDetails.getMontant());
+        this.setMontant(this.getMontant()+achatDetails.getMontant());
     }
 
     public void removeAchatDetails(AchatDetails achatDetails){

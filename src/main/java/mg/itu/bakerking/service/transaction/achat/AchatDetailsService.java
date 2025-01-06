@@ -1,16 +1,14 @@
 package mg.itu.bakerking.service.transaction.achat;
 
+import lombok.AllArgsConstructor;
 import mg.itu.bakerking.entity.transaction.achat.AchatDetails;
 import mg.itu.bakerking.repository.transaction.achat.AchatDetailsRepo;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class AchatDetailsService {
     private final AchatDetailsRepo repo;
-
-    public AchatDetailsService(AchatDetailsRepo repo) {
-        this.repo = repo;
-    }
 
     public AchatDetails save(AchatDetails achatDetails){
         this.setId(achatDetails);

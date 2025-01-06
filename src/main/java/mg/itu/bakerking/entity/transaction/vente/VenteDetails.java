@@ -3,11 +3,8 @@ package mg.itu.bakerking.entity.transaction.vente;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import mg.itu.bakerking.entity.produit.Ingredient;
 import mg.itu.bakerking.entity.produit.Produit;
 import mg.itu.bakerking.entity.transaction.TransactionDetails;
-
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -18,10 +15,11 @@ public class VenteDetails extends TransactionDetails {
     private Produit produit;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_transaction")
     private Vente vente;
 
-    public VenteDetails(double quantite,double montant,Produit produit){
-        super(quantite,montant);
+    public VenteDetails(String idDetails,double quantite,double montant,Produit produit){
+        super(idDetails,quantite,montant);
         this.setProduit(produit);
     }
 }

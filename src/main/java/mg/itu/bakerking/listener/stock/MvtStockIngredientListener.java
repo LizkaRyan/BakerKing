@@ -1,4 +1,4 @@
-package mg.itu.bakerking.listener.transaction;
+package mg.itu.bakerking.listener.stock;
 
 import jakarta.persistence.PrePersist;
 import mg.itu.bakerking.entity.stock.MvtStockIngredient;

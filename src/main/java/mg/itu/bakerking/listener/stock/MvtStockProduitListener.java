@@ -1,9 +1,7 @@
-package mg.itu.bakerking.listener.transaction;
+package mg.itu.bakerking.listener.stock;
 
 import jakarta.persistence.PrePersist;
-import mg.itu.bakerking.entity.stock.MvtStockIngredient;
 import mg.itu.bakerking.entity.stock.MvtStockProduit;
-import mg.itu.bakerking.repository.stock.MvtStockIngredientRepo;
 import mg.itu.bakerking.repository.stock.MvtStockProduitRepo;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
