@@ -27,9 +27,9 @@ public class ProduitController {
         return new Dispatcher("stock/production.jsp").addObject("produits",produitRepo.findAll());
     }
 
-    @PostMapping
-    public String insert(@ModelAttribute ProductionDTO productionDTO){
-        produitService.save(productionDTO.getStockDTO());
-        return "redirect:/produit/form";
-    }
+//    @PostMapping
+//    public String insert(@ModelAttribute ProductionDTO productionDTO){
+//        produitService.save(productionDTO.getStockDTO());
+//        return "redirect:/produit/form";
+//    }
 }
