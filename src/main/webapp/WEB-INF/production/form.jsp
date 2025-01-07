@@ -9,7 +9,7 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Insertion achats</h4>
+                <h4 class="card-title">Insertion production</h4>
                 <form action="/produit" method="post">
                     <div class="row">
                         <div class="col-md-6">

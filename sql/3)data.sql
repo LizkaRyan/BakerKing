@@ -52,3 +52,19 @@ INSERT INTO ingredient_produit (id_ingredient, id_produit, quantite) VALUES
                                                                          ('ING006', 'PRD006', 1),  -- Oeufs pour Café (200g)
                                                                          ('ING005', 'PRD007', 0.3),  -- Lait pour Thé (300ml)
                                                                          ('ING006', 'PRD007', 2);  -- Oeufs pour Thé (150g)
+
+
+INSERT INTO produit (produit, prix_unitaire, id_categorie) VALUES
+                                                               ('Mofo fo paina', 1000, 'CAT001');
+INSERT INTO ingredient_produit (id_ingredient, id_produit, quantite) VALUES
+                                                                         ('ING001', 'PRD008', 0.5),  -- Farine pour Baguette (500g)
+                                                                         ('ING002', 'PRD008', 0.6),  -- Sucre pour Baguette (200g)
+                                                                         ('ING003', 'PRD008', 0.25);  -- Beurre pour Baguette (150g)
+INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-07', 3,'PRD001');
+INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-08', 2,'PRD008');
+INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-08', 10,'PRD002');
+INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-08', 4,'PRD003');
+INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-08', 4,'PRD004');
+INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-08', 5,'PRD005');
+INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-08', 5,'PRD006');
+INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-10', 10,'PRD008');

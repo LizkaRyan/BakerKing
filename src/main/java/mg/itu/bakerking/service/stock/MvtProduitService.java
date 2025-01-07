@@ -1,5 +1,7 @@
 package mg.itu.bakerking.service.stock;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import mg.itu.bakerking.dto.produit.ProduitDTO;
 import mg.itu.bakerking.entity.produit.IngredientProduit;
 import mg.itu.bakerking.entity.stock.MvtStockProduit;
@@ -12,16 +14,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
+@Getter
 public class MvtProduitService {
     private MvtStockProduitRepo repo;
     private IngredientProduitRepo ingrepo;
     private ProduitRepo produitrepo;
-
-    public MvtProduitService(MvtStockProduitRepo repo, IngredientProduitRepo ingrepo, ProduitRepo produitrepo) {
-        this.repo = repo;
-        this.ingrepo = ingrepo;
-        this.produitrepo = produitrepo;
-    }
 
     public boolean isAvailable(String idProduit,double quantite){
         Double quantiteStock=repo.findEtatStock(idProduit).orElse(0d);

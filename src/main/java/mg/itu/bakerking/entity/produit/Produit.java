@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -19,4 +21,7 @@ public class Produit {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categorie")
     private Categorie categorie;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "produit")
+    private List<IngredientProduit> listIngredientProduit;
 }
