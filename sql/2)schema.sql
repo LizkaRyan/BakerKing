@@ -109,3 +109,13 @@ CREATE TABLE ingredient_produit
     FOREIGN KEY (id_ingredient) REFERENCES ingredient (id_ingredient),
     FOREIGN KEY (id_produit) REFERENCES produit (id_produit)
 );
+
+CREATE TABLE production
+(
+    id_production   VARCHAR(100) default 'PRC00'||nextval('seq_production'),
+    date_production DATE           NOT NULL,
+    quantite        DECIMAL(15, 2) NOT NULL,
+    id_produit      VARCHAR(100)   NOT NULL,
+    PRIMARY KEY (id_production),
+    FOREIGN KEY (id_produit) REFERENCES produit (id_produit)
+);

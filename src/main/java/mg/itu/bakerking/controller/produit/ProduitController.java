@@ -26,10 +26,4 @@ public class ProduitController {
     public ModelAndView index(){
         return new Dispatcher("stock/production").addObject("produits",produitRepo.findAll());
     }
-
-    @PostMapping
-    public String insert(@ModelAttribute ProductionDTO productionDTO){
-        mvtProduitService.save(productionDTO.getStockDTO());
-        return "redirect:/produit/form";
-    }
 }

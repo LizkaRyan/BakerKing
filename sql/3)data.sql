@@ -36,7 +36,6 @@ INSERT INTO ingredient_produit (id_ingredient, id_produit, quantite) VALUES
                                                                          ('ING003', 'PRD001', 0.15),  -- Beurre pour Baguette (150g)
                                                                          ('ING001', 'PRD002', 0.3),  -- Farine pour Croissant (300g)
                                                                          ('ING002', 'PRD002', 0.1),  -- Sucre pour Croissant (100g)
-                                                                         ('ING003', 'PRD002', 0.25),  -- Beurre pour Croissant (250g)
                                                                          ('ING001', 'PRD003', 0.4),  -- Farine pour Pain au chocolat (400g)
                                                                          ('ING002', 'PRD003', 0.15),  -- Sucre pour Pain au chocolat (150g)
                                                                          ('ING003', 'PRD003', 0.2),  -- Beurre pour Pain au chocolat (200g)
@@ -53,6 +52,7 @@ INSERT INTO ingredient_produit (id_ingredient, id_produit, quantite) VALUES
                                                                          ('ING005', 'PRD007', 0.3),  -- Lait pour Thé (300ml)
                                                                          ('ING006', 'PRD007', 2);  -- Oeufs pour Thé (150g)
 
+INSERT INTO ingredient_produit (id_ingredient, id_produit, quantite) VALUES ('ING007', 'PRD003', 0.25);  -- Chocolat pour Croissant (250g)
 
 INSERT INTO produit (produit, prix_unitaire, id_categorie) VALUES
                                                                ('Mofo fo paina', 1000, 'CAT001');
