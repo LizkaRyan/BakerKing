@@ -42,4 +42,8 @@ public class AchatService {
         }
         return this.repo.save(achat);
     }
+
+    public Achat findById(String idAchat){
+        return this.repo.findById(idAchat).orElseThrow(()->new RuntimeException("Id achat non retrouvé"));
+    }
 }

@@ -11,6 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class IndexController {
     @GetMapping
     public ModelAndView index(){
-        return new Dispatcher("stock/index.jsp");
+        return new Dispatcher("stock/index");
     }
 }

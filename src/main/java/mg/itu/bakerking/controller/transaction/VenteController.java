@@ -21,12 +21,12 @@ public class VenteController {
     private final VenteService venteService;
     @GetMapping("/form")
     public ModelAndView form(){
-        return new Dispatcher("transaction/vente/form.jsp").addObject("produits",produitService.getRepo().findAll());
+        return new Dispatcher("transaction/vente/form").addObject("produits",produitService.getRepo().findAll());
     }
 
     @GetMapping
     public ModelAndView liste(){
-        return new Dispatcher("transaction/vente/index.jsp").addObject("ventes",venteService.getVenteRepository().findAll());
+        return new Dispatcher("transaction/vente/index").addObject("ventes",venteService.getVenteRepository().findAll());
     }
 
     @GetMapping("/details/{idVente}")

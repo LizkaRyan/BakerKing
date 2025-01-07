@@ -24,7 +24,7 @@ public class ProduitController {
 
     @GetMapping("/form")
     public ModelAndView index(){
-        return new Dispatcher("stock/production.jsp").addObject("produits",produitRepo.findAll());
+        return new Dispatcher("stock/production").addObject("produits",produitRepo.findAll());
     }
 
     @PostMapping

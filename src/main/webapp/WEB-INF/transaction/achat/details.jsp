@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="mg.itu.bakerking.entity.transaction.vente.Vente" %><%
-    List<Vente> ventes=(List<Vente>)request.getAttribute("ventes");
+<%@ page import="mg.itu.bakerking.entity.transaction.achat.AchatDetails" %><%
+    List<AchatDetails> details=(List<AchatDetails>)request.getAttribute("details");
 %>
 <div class="row">
     <div class="col-md-6">
@@ -13,19 +13,19 @@
                     <tr>
                         <th>#</th>
                         <th>Montant</th>
-                        <th>Date transaction</th>
-                        <th>Détails</th>
+                        <th>Quantite</th>
+                        <th>Produit</th>
                     </tr>
                     </thead>
                     <tbody>
                     <%
-                        for (Vente vente:ventes) {
+                        for (AchatDetails detail:details) {
                     %>
                     <tr>
-                        <td><%= vente.getIdTransaction() %></td>
-                        <td><%= vente.getMontant() %></td>
-                        <td><%= vente.getDateTransaction() %></td>
-                        <td><a href="/vente/details/<%= vente.getIdTransaction() %>">Voir détails</a></td>
+                        <td><%= detail.getIdDetails() %></td>
+                        <td><%= detail.getMontant() %></td>
+                        <td><%= detail.getQuantite() %></td>
+                        <td><%= detail.getIngredient().getIngredient() %></td>
                     </tr>
                     <% } %>
                     </tbody>

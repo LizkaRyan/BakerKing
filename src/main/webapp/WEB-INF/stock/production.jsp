@@ -74,7 +74,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <input type="number" name="stockDTO[0].quantite" class="form-control" id="floatingInput" placeholder="Quantite">
+                                    <input type="number" name="stockDTO[`+id+`].quantite" class="form-control" id="floatingInput" placeholder="Quantite">
                                     <label for="floatingInput">Quantite</label>
                                 </div>
                             </div>

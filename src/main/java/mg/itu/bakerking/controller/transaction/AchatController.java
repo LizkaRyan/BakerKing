@@ -7,10 +7,7 @@ import mg.itu.bakerking.dto.transaction.AchatDTO;
 import mg.itu.bakerking.service.produit.IngredientService;
 import mg.itu.bakerking.service.transaction.achat.AchatService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -23,7 +20,12 @@ public class AchatController {
 
     @GetMapping("/form")
     public ModelAndView form(){
-        return new Dispatcher("transaction/achat/form.jsp").addObject("ingredients",ingredientService.getRepo().findAll());
+        return new Dispatcher("transaction/achat/form").addObject("ingredients",ingredientService.getRepo().findAll());
+    }
+
+    @GetMapping("/details/{idAchat}")
+    public ModelAndView details(@PathVariable("idAchat") String idAchat){
+        return new Dispatcher("transaction/achat/details").addObject("details",achatService.findById(idAchat).getAchatDetails());
     }
 
     @PostMapping
@@ -39,6 +41,6 @@ public class AchatController {
 
     @GetMapping
     public ModelAndView index(){
-        return new Dispatcher("stock/index.jsp");
+        return new Dispatcher("transaction/achat/index").addObject("achats",achatService.getRepo().findAll());
     }
 }
