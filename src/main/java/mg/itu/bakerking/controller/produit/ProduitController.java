@@ -4,20 +4,19 @@ import lombok.AllArgsConstructor;
 import mg.itu.bakerking.controller.affichage.Dispatcher;
 import mg.itu.bakerking.dto.produit.ProductionDTO;
 import mg.itu.bakerking.repository.produit.ProduitRepo;
+import mg.itu.bakerking.service.produit.ProduitService;
 import mg.itu.bakerking.service.stock.MvtProduitService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @AllArgsConstructor
 @RequestMapping("/produit")
 public class ProduitController {
-    private MvtProduitService produitService;
+    private MvtProduitService mvtProduitService;
     private ProduitRepo produitRepo;
+    private ProduitService produitService;
 
     @GetMapping("/form")
     public ModelAndView index(){
@@ -26,7 +25,12 @@ public class ProduitController {
 
     @PostMapping
     public String insert(@ModelAttribute ProductionDTO productionDTO){
-        produitService.save(productionDTO.getStockDTO());
+        mvtProduitService.save(productionDTO.getStockDTO());
         return "redirect:/produit/form";
+    }
+
+    @GetMapping
+    public ModelAndView production(@RequestParam("idIngredient") String idIngredient, @RequestParam("idCategorie") String idCategorie) {
+        return new Dispatcher("produitList").addObject("production", produitService.getProduction(idCategorie, idIngredient));
     }
 }
