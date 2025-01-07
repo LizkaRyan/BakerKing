@@ -25,23 +25,4 @@ public class ProduitService {
     public Produit findByIdProduit(String idProduit){
         return repo.findById(idProduit).orElseThrow(()->new RuntimeException("Id Produit non reconnue"));
     }
-
-    public List<Production> getProduction(String idCategorie, String idIngredient) {
-        List<Production> productions = repo.getListProduction(idCategorie);
-        List<Production> valiny = new ArrayList<>();
-        for (Production p : productions) {
-            boolean ok = false;
-            for (IngredientProduit i : p.getProduit().getListIngredientProduit()) {
-                if (i.getIngredient().getIdIngredient().equals(idIngredient)) {
-                     ok = true;
-                     break;
-                }
-            }
-            if (ok) {
-                valiny.add(p);
-            }
-        }
-
-        return valiny;
-    }
 }

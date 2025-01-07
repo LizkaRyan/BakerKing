@@ -12,10 +12,4 @@ import java.util.List;
 
 public interface ProduitRepo extends JpaRepository<Produit,String>  {
 
-    @Query(value = """
-        select pr from Production pr 
-        inner join pr.produit p 
-        where p.categorie.idCategorie = :idCategorie 
-        """)
-    public List<Production> getListProduction(@Param("idCategorie") String idCategorie);
 }

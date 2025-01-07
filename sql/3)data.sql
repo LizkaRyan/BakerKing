@@ -66,3 +66,5 @@ INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-
 INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-08', 4,'PRD003');
 INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-08', 4,'PRD004');
 INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-08', 5,'PRD005');
+INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-08', 5,'PRD006');
+INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-10', 10,'PRD008');

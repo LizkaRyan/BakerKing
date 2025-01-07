@@ -32,12 +32,4 @@ public class ProduitController {
         mvtProduitService.save(productionDTO.getStockDTO());
         return "redirect:/produit/form";
     }
-
-    @GetMapping
-    public ModelAndView production(@RequestParam("idIngredient") String idIngredient, @RequestParam("idCategorie") String idCategorie) {
-        return new Dispatcher("produitList")
-                .addObject("production", produitService.getProduction(idCategorie, idIngredient))
-                .addObject("ingredients",ingredientRepo.findAll())
-                .addObject("categories",categorieRepo.findAll());
-    }
 }
