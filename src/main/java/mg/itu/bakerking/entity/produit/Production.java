@@ -14,8 +14,9 @@ public class Production {
     private String idProduction;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_produit")
     private Produit produit;
-    private LocalDate dateProduit;
+    private LocalDate dateProduction;
     private int quantite;
 
 }

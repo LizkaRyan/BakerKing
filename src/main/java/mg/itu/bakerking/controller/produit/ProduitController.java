@@ -3,6 +3,8 @@ package mg.itu.bakerking.controller.produit;
 import lombok.AllArgsConstructor;
 import mg.itu.bakerking.controller.affichage.Dispatcher;
 import mg.itu.bakerking.dto.produit.ProductionDTO;
+import mg.itu.bakerking.repository.produit.CategorieRepo;
+import mg.itu.bakerking.repository.produit.IngredientRepo;
 import mg.itu.bakerking.repository.produit.ProduitRepo;
 import mg.itu.bakerking.service.produit.ProduitService;
 import mg.itu.bakerking.service.stock.MvtProduitService;
@@ -17,6 +19,8 @@ public class ProduitController {
     private MvtProduitService mvtProduitService;
     private ProduitRepo produitRepo;
     private ProduitService produitService;
+    private IngredientRepo ingredientRepo;
+    private CategorieRepo categorieRepo;
 
     @GetMapping("/form")
     public ModelAndView index(){
@@ -31,6 +35,9 @@ public class ProduitController {
 
     @GetMapping
     public ModelAndView production(@RequestParam("idIngredient") String idIngredient, @RequestParam("idCategorie") String idCategorie) {
-        return new Dispatcher("produitList").addObject("production", produitService.getProduction(idCategorie, idIngredient));
+        return new Dispatcher("produitList")
+                .addObject("production", produitService.getProduction(idCategorie, idIngredient))
+                .addObject("ingredients",ingredientRepo.findAll())
+                .addObject("categories",categorieRepo.findAll());
     }
 }

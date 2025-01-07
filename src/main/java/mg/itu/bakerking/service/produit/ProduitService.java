@@ -37,7 +37,7 @@ public class ProduitService {
                      break;
                 }
             }
-            if (!ok) {
+            if (ok) {
                 valiny.add(p);
             }
         }
