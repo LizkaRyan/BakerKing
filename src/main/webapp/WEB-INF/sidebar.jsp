@@ -1,9 +1,9 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
         <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="/produit/form">
                 <i class="icon-grid menu-icon"></i>
-                <span class="menu-title">Benefice</span>
+                <span class="menu-title">Production</span>
             </a>
         </li>
         <li class="nav-item">

@@ -1,5 +1,6 @@
 package mg.itu.bakerking.controller.produit;
 
+import lombok.AllArgsConstructor;
 import mg.itu.bakerking.controller.affichage.Dispatcher;
 import mg.itu.bakerking.dto.produit.ProductionDTO;
 import mg.itu.bakerking.repository.produit.ProduitRepo;
@@ -12,15 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@AllArgsConstructor
 @RequestMapping("/produit")
 public class ProduitController {
     private MvtProduitService produitService;
     private ProduitRepo produitRepo;
-
-    public ProduitController(MvtProduitService produitService, ProduitRepo produitRepo) {
-        this.produitService = produitService;
-        this.produitRepo = produitRepo;
-    }
 
     @GetMapping("/form")
     public ModelAndView index(){
