@@ -24,7 +24,7 @@ public class ProductionController {
                 .addObject("idCategorie",idCategorie);
     }
 
-    @GetMapping("/form")
+    @GetMapping("/form_production")
     public ModelAndView form(){
         return new Dispatcher("production/form")
                 .addObject("produits",productionService.getProduitRepo().findAll());
