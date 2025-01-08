@@ -10,7 +10,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Insertion production</h4>
-                <form action="/produit" method="post">
+                <form action="/production" method="post">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-floating mb-3">

@@ -2,6 +2,7 @@ package mg.itu.bakerking.service.stock;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import mg.itu.bakerking.dto.produit.ProductionDTO;
 import mg.itu.bakerking.dto.produit.ProduitDTO;
 import mg.itu.bakerking.entity.produit.IngredientProduit;
 import mg.itu.bakerking.entity.stock.MvtStockProduit;
@@ -11,6 +12,7 @@ import mg.itu.bakerking.repository.stock.MvtStockProduitRepo;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,7 +28,9 @@ public class MvtProduitService {
         return quantiteStock>=quantite;
     }
 
-    public void save(List<ProduitDTO> stock) {
+    public List<MvtStockProduit> save(ProductionDTO productionDTO) {
+        List<ProduitDTO> stock=productionDTO.getStockDTO();
+        List<MvtStockProduit> mvtStockProduits=new ArrayList<>();
         for (ProduitDTO m: stock) {
             List<IngredientProduit> ingpro = ingrepo.findByIdProduit(m.getIdProduit());
             for (IngredientProduit i: ingpro) {
@@ -37,12 +41,11 @@ public class MvtProduitService {
 
             MvtStockProduit mvtStockProduit = new MvtStockProduit();
             mvtStockProduit.setProduit(produitrepo.findById(m.getIdProduit()).orElseThrow(()->new RuntimeException("Id non reconnu")));
-            mvtStockProduit.setDateMvt(LocalDate.now());
+            mvtStockProduit.setDateMvt(productionDTO.getDate());
             mvtStockProduit.setEntree(m.getQuantite());
             mvtStockProduit.setDescription("Production");
-            repo.save(mvtStockProduit);
+            mvtStockProduits.add(repo.save(mvtStockProduit));
         }
-
-
+        return mvtStockProduits;
     }
 }

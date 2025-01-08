@@ -2,11 +2,10 @@ package mg.itu.bakerking.controller.produit;
 
 import lombok.AllArgsConstructor;
 import mg.itu.bakerking.controller.affichage.Dispatcher;
+import mg.itu.bakerking.dto.produit.ProductionDTO;
 import mg.itu.bakerking.service.produit.ProductionService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -15,17 +14,25 @@ import org.springframework.web.servlet.ModelAndView;
 public class ProductionController {
     private ProductionService productionService;
     @GetMapping
-    public ModelAndView production(@RequestParam("idIngredient") String idIngredient, @RequestParam("idCategorie") String idCategorie) {
-        return new Dispatcher("produitList")
+    public ModelAndView production(@RequestParam(value = "idIngredient",defaultValue = "Tous") String idIngredient,
+                                   @RequestParam(value = "idCategorie",defaultValue = "Tous") String idCategorie) {
+        return new Dispatcher("production/index")
                 .addObject("production", productionService.getProduction(idCategorie, idIngredient))
                 .addObject("ingredients",productionService.getIngredientRepo().findAll())
-                .addObject("categories",productionService.getProductionRepo().findAll())
+                .addObject("categories",productionService.getCategorieRepo().findAll())
                 .addObject("idIngredient",idIngredient)
                 .addObject("idCategorie",idCategorie);
     }
 
-    @GetMapping("/form")
+    @GetMapping("/form_production")
     public ModelAndView form(){
-        return new Dispatcher("stock/form").addObject();
+        return new Dispatcher("production/form")
+                .addObject("produits",productionService.getProduitRepo().findAll());
+    }
+
+    @PostMapping
+    public String insert(@ModelAttribute ProductionDTO productionDTO){
+        productionService.save(productionDTO);
+        return "redirect:/production/form";
     }
 }

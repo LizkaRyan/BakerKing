@@ -13,7 +13,7 @@ public interface ProductionRepo extends JpaRepository<Production,String> {
     @Query(value = """
         select pr from Production pr 
         inner join pr.produit p 
-        where p.categorie.idCategorie = :idCategorie 
+        where p.categorie.idCategorie = :idCategorie or true = :allCategorie
         """)
-    public List<Production> getListProduction(@Param("idCategorie") String idCategorie);
+    public List<Production> getListProduction(@Param("idCategorie") String idCategorie,@Param("allCategorie") boolean allCategorie);
 }
