@@ -18,7 +18,7 @@ public class AchatController {
 
     private final AchatService achatService;
 
-    @GetMapping("/form")
+    @GetMapping("/form_achat")
     public ModelAndView form(){
         return new Dispatcher("transaction/achat/form").addObject("ingredients",ingredientService.getRepo().findAll());
     }

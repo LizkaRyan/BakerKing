@@ -5,6 +5,13 @@ INSERT INTO unite (unite) VALUES
                               ('Piece'),
                               ('Millilitre');
 
+INSERT INTO type_produit(type_produit) VALUES
+                                                ('Nature'),
+                                                ('Chocolat'),
+                                                ('Vanille'),
+                                                ('Pomme'),
+                                                ('Café');
+
 INSERT INTO categorie (categorie) VALUES
                                       ('Pains'),
                                       ('Viennoiseries'),
@@ -21,14 +28,14 @@ INSERT INTO ingredient (ingredient, prix_unitaire, id_unite) VALUES
                                                                  ('Chocolat', 1000, 'UNT002'),
                                                                  ('Vanille', 3000, 'UNT002');
 
-INSERT INTO produit (produit, prix_unitaire, id_categorie) VALUES
-                                                               ('Baguette', 1000, 'CAT001'),
-                                                               ('Croissant', 1500, 'CAT002'),
-                                                               ('Pain au chocolat', 2000, 'CAT002'),
-                                                               ('Tarte aux pommes', 3050, 'CAT003'),
-                                                               ('Eclair au chocolat', 4000, 'CAT003'),
-                                                               ('Café', 1800, 'CAT004'),
-                                                               ('Thé', 1050, 'CAT004');
+INSERT INTO produit (id_type_produit,produit, prix_unitaire, id_categorie) VALUES
+                                                               ('TPR001','Baguette', 1000, 'CAT001'),
+                                                               ('TPR001', 'Croissant', 1500, 'CAT002'),
+                                                               ('TPR002', 'Pain au chocolat', 2000, 'CAT002'),
+                                                               ('TPR004', 'Tarte aux pommes', 3050, 'CAT003'),
+                                                               ('TPR002', 'Eclair au chocolat', 4000, 'CAT003'),
+                                                               ('TPR005', 'Café', 1800, 'CAT004'),
+                                                               ('TPR001', 'Thé', 1050, 'CAT004');
 
 INSERT INTO ingredient_produit (id_ingredient, id_produit, quantite) VALUES
                                                                          ('ING001', 'PRD001', 0.5),  -- Farine pour Baguette (500g)
@@ -54,8 +61,8 @@ INSERT INTO ingredient_produit (id_ingredient, id_produit, quantite) VALUES
 
 INSERT INTO ingredient_produit (id_ingredient, id_produit, quantite) VALUES ('ING007', 'PRD003', 0.25);  -- Chocolat pour Croissant (250g)
 
-INSERT INTO produit (produit, prix_unitaire, id_categorie) VALUES
-                                                               ('Mofo fo paina', 1000, 'CAT001');
+INSERT INTO produit (id_type_produit,produit, prix_unitaire, id_categorie) VALUES
+                                                               ('TPR001','Mofo fo paina', 1000, 'CAT001');
 INSERT INTO ingredient_produit (id_ingredient, id_produit, quantite) VALUES
                                                                          ('ING001', 'PRD008', 0.5),  -- Farine pour Baguette (500g)
                                                                          ('ING002', 'PRD008', 0.6),  -- Sucre pour Baguette (200g)

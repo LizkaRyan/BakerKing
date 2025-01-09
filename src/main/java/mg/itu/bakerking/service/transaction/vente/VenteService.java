@@ -8,6 +8,7 @@ import mg.itu.bakerking.dto.transaction.VenteDTO;
 import mg.itu.bakerking.entity.produit.Produit;
 import mg.itu.bakerking.entity.transaction.vente.Vente;
 import mg.itu.bakerking.entity.transaction.vente.VenteDetails;
+import mg.itu.bakerking.repository.transaction.vente.VenteDetailRepository;
 import mg.itu.bakerking.repository.transaction.vente.VenteRepository;
 import mg.itu.bakerking.service.produit.ProduitService;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ public class VenteService {
     private VenteRepository venteRepository;
 
     private ProduitService produitService;
+    private VenteDetailRepository venteDetailRepo;
 
     @Transactional
     public Vente save(VenteDTO venteDTO){
@@ -39,5 +41,10 @@ public class VenteService {
 
     public Vente findById(String idVente){
         return this.venteRepository.findById(idVente).orElseThrow(()->new RuntimeException("Id Vente non reconnue"));
+    }
+
+    public List<VenteDetails> findVenteDetailsByCategorie(String idTypeProduit, String idCategorie) {
+        List<VenteDetails> list = venteDetailRepo.findByCategorie(idTypeProduit, idCategorie);
+        return list;
     }
 }

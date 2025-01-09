@@ -21,8 +21,8 @@
             </a>
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="/achat/form_achat">Insertion achat</a></li>
                     <li class="nav-item"> <a class="nav-link" href="/achat">Liste des achats</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="/achat/form">Insertion achat</a></li>
                 </ul>
             </div>
         </li>
@@ -34,8 +34,9 @@
             </a>
             <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="/vente/form_vente">Insertion vente</a></li>
                     <li class="nav-item"><a class="nav-link" href="/vente">Liste des ventes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/vente/form">Insertion vente</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/vente/filter?idTypeProduit=Tous&idCategorie=Tous">Liste vente avec filtre</a></li>
                 </ul>
             </div>
         </li>

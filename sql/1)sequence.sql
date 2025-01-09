@@ -14,3 +14,4 @@ CREATE SEQUENCE seq_categorie;
 CREATE SEQUENCE seq_vente_details;
 CREATE SEQUENCE seq_vente;
 CREATE SEQUENCE seq_production;
+CREATE SEQUENCE seq_type_produit;

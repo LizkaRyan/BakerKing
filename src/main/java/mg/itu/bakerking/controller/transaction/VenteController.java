@@ -1,6 +1,7 @@
 package mg.itu.bakerking.controller.transaction;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import mg.itu.bakerking.controller.affichage.Dispatcher;
@@ -19,7 +20,7 @@ public class VenteController {
 
     private final ProduitService produitService;
     private final VenteService venteService;
-    @GetMapping("/form")
+    @GetMapping("/form_vente")
     public ModelAndView form(){
         return new Dispatcher("transaction/vente/form").addObject("produits",produitService.getRepo().findAll());
     }
@@ -41,7 +42,18 @@ public class VenteController {
         catch (Exception ex){
             throw ex;
         }
-        return "redirect:/achat";
+        return "redirect:/vente/filter?idTypeProduit=Tous&idCategorie=Tous";
     }
+
+    @GetMapping("/filter")
+    public ModelAndView filter(@RequestParam(value = "idTypeProduit", required = false) String idTypeProduit, @RequestParam(value = "idCategorie", required = false) String idCategorie) {
+        return new Dispatcher("transaction/vente/listFilter")
+                .addObject("details", venteService.findVenteDetailsByCategorie(idTypeProduit, idCategorie))
+                .addObject("categories", produitService.getCategorieRepo().findAll())
+                .addObject("TypeProduits", produitService.getTypeProduitRepo().findAll())
+                .addObject("idTypeProduit", idTypeProduit)
+                .addObject("idCategorie", idCategorie);
+    }
+
 
 }

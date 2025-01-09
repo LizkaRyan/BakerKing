@@ -6,8 +6,10 @@ import lombok.Getter;
 import mg.itu.bakerking.entity.produit.IngredientProduit;
 import mg.itu.bakerking.entity.produit.Production;
 import mg.itu.bakerking.entity.produit.Produit;
+import mg.itu.bakerking.repository.produit.CategorieRepo;
 import mg.itu.bakerking.repository.produit.IngredientProduitRepo;
 import mg.itu.bakerking.repository.produit.ProduitRepo;
+import mg.itu.bakerking.repository.produit.TypeProduitRepo;
 import mg.itu.bakerking.service.stock.MvtProduitService;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,8 @@ import java.util.List;
 @Getter
 public class ProduitService {
     private ProduitRepo repo;
+    private TypeProduitRepo typeProduitRepo;
+    private CategorieRepo categorieRepo;
 
     private MvtProduitService mvtProduitService;
 
