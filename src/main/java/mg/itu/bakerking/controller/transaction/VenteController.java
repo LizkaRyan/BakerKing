@@ -1,12 +1,10 @@
 package mg.itu.bakerking.controller.transaction;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import mg.itu.bakerking.controller.affichage.Dispatcher;
-import mg.itu.bakerking.dto.transaction.AchatDTO;
-import mg.itu.bakerking.dto.transaction.VenteDTO;
+import mg.itu.bakerking.dto.transaction.VenteRequest;
+import mg.itu.bakerking.exception.CreationVenteException;
 import mg.itu.bakerking.service.produit.ProduitService;
 import mg.itu.bakerking.service.transaction.vente.VenteService;
 import org.springframework.stereotype.Controller;
@@ -35,12 +33,14 @@ public class VenteController {
         return new Dispatcher("transaction/vente/details.jsp").addObject("details",venteService.findById(idVente).getVenteDetails());
     }
     @PostMapping
-    public String save(@Valid @ModelAttribute VenteDTO venteDTO){
+    public Object save(@Valid @ModelAttribute VenteRequest venteDTO){
         try{
             this.venteService.save(venteDTO);
         }
-        catch (Exception ex){
-            throw ex;
+        catch (CreationVenteException ex){
+            return new Dispatcher("transaction/vente/form")
+                    .addObject("exception",ex)
+                    .addObject("produits",produitService.getRepo().findAll());
         }
         return "redirect:/vente/filter?idTypeProduit=Tous&idCategorie=Tous";
     }
@@ -54,6 +54,5 @@ public class VenteController {
                 .addObject("idTypeProduit", idTypeProduit)
                 .addObject("idCategorie", idCategorie);
     }
-
 
 }

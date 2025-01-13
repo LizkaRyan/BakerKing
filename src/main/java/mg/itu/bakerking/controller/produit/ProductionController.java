@@ -2,7 +2,7 @@ package mg.itu.bakerking.controller.produit;
 
 import lombok.AllArgsConstructor;
 import mg.itu.bakerking.controller.affichage.Dispatcher;
-import mg.itu.bakerking.dto.produit.ProductionDTO;
+import mg.itu.bakerking.dto.produit.ProductionRequest;
 import mg.itu.bakerking.service.produit.ProductionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +31,7 @@ public class ProductionController {
     }
 
     @PostMapping
-    public String insert(@ModelAttribute ProductionDTO productionDTO){
+    public String insert(@ModelAttribute ProductionRequest productionDTO){
         productionService.save(productionDTO);
         return "redirect:/production/form";
     }

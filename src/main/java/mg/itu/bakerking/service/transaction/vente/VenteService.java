@@ -3,16 +3,17 @@ package mg.itu.bakerking.service.transaction.vente;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import mg.itu.bakerking.dto.produit.ProduitDTO;
-import mg.itu.bakerking.dto.transaction.VenteDTO;
-import mg.itu.bakerking.entity.produit.Produit;
+import mg.itu.bakerking.dto.produit.ProduitRequest;
+import mg.itu.bakerking.dto.transaction.ChiffreAffaireProduit;
+import mg.itu.bakerking.dto.transaction.VenteRequest;
 import mg.itu.bakerking.entity.transaction.vente.Vente;
 import mg.itu.bakerking.entity.transaction.vente.VenteDetails;
-import mg.itu.bakerking.repository.transaction.vente.VenteDetailRepository;
+import mg.itu.bakerking.exception.CreationVenteException;
+import mg.itu.bakerking.exception.InsuficientStockException;
 import mg.itu.bakerking.repository.transaction.vente.VenteRepository;
-import mg.itu.bakerking.service.produit.ProduitService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,18 +23,22 @@ import java.util.List;
 public class VenteService {
     private VenteRepository venteRepository;
 
-    private ProduitService produitService;
-    private VenteDetailRepository venteDetailRepo;
+    private VenteDetailsService venteDetailsService;
 
     @Transactional
-    public Vente save(VenteDTO venteDTO){
+    public Vente save(VenteRequest venteDTO)throws CreationVenteException{
         List<VenteDetails> venteDetails=new ArrayList<>();
-        for (ProduitDTO produitDTO: venteDTO.getProduits()) {
-            Produit produit= produitService.findByIdProduit(produitDTO.getIdProduit());
-            /*if(!produitService.getMvtProduitService().isAvailable(produitDTO.getIdProduit(), produitDTO.getQuantite())){
-                throw new RuntimeException("Stock insuffisante pour "+produit.getProduit());
-            }*/
-            venteDetails.add(new VenteDetails("VTD00"+venteRepository.findIdDetails(), produitDTO.getQuantite(),produit.getPrixUnitaire(),produit));
+        List<InsuficientStockException> exceptions=new ArrayList<InsuficientStockException>();
+        for (ProduitRequest produitDTO: venteDTO.getProduits()) {
+            try{
+                venteDetails.add(venteDetailsService.createVenteDetails(produitDTO));
+            }
+            catch (InsuficientStockException ex){
+                exceptions.add(ex);
+            }
+        }
+        if(exceptions.size()!=0){
+            throw new CreationVenteException(exceptions);
         }
         Vente vente=new Vente(venteDTO.getDateTransaction(),venteDetails);
         return venteRepository.save(vente);
@@ -44,7 +49,14 @@ public class VenteService {
     }
 
     public List<VenteDetails> findVenteDetailsByCategorie(String idTypeProduit, String idCategorie) {
-        List<VenteDetails> list = venteDetailRepo.findByCategorie(idTypeProduit, idCategorie);
-        return list;
+        return venteDetailsService.getVenteDetailRepo().findByCategorie(idTypeProduit, idCategorie);
+    }
+
+    public Double findChiffreAffaire(LocalDate dateMin,LocalDate dateMax){
+        return this.venteRepository.findChiffreAffaire(dateMin,dateMax).orElse(0d);
+    }
+
+    public List<ChiffreAffaireProduit> findChiffreAffaireProduit(LocalDate dateMin,LocalDate dateMax){
+        return this.venteDetailsService.getVenteDetailRepository().findChiffreAffaireEachProduct(dateMin,dateMax);
     }
 }

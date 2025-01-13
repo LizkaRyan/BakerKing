@@ -2,8 +2,8 @@ package mg.itu.bakerking.service.stock;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import mg.itu.bakerking.dto.produit.ProductionDTO;
-import mg.itu.bakerking.dto.produit.ProduitDTO;
+import mg.itu.bakerking.dto.produit.ProductionRequest;
+import mg.itu.bakerking.dto.produit.ProduitRequest;
 import mg.itu.bakerking.entity.produit.IngredientProduit;
 import mg.itu.bakerking.entity.stock.MvtStockProduit;
 import mg.itu.bakerking.repository.produit.IngredientProduitRepo;
@@ -11,7 +11,6 @@ import mg.itu.bakerking.repository.produit.ProduitRepo;
 import mg.itu.bakerking.repository.stock.MvtStockProduitRepo;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,14 +23,18 @@ public class MvtProduitService {
     private ProduitRepo produitrepo;
 
     public boolean isAvailable(String idProduit,double quantite){
-        Double quantiteStock=repo.findEtatStock(idProduit).orElse(0d);
+        Double quantiteStock=this.findEtatStock(idProduit);
         return quantiteStock>=quantite;
     }
 
-    public List<MvtStockProduit> save(ProductionDTO productionDTO) {
-        List<ProduitDTO> stock=productionDTO.getStockDTO();
+    public Double findEtatStock(String idProduit){
+        return repo.findEtatStock(idProduit).orElse(0d);
+    }
+
+    public List<MvtStockProduit> save(ProductionRequest productionDTO) {
+        List<ProduitRequest> stock=productionDTO.getStockDTO();
         List<MvtStockProduit> mvtStockProduits=new ArrayList<>();
-        for (ProduitDTO m: stock) {
+        for (ProduitRequest m: stock) {
             List<IngredientProduit> ingpro = ingrepo.findByIdProduit(m.getIdProduit());
             for (IngredientProduit i: ingpro) {
                 /*if (repo.findEtatStock(i.getIngredient().getIdIngredient()) < i.getQuantite()* m.getQuantite()){
