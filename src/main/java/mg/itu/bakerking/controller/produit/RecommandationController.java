@@ -5,11 +5,10 @@ import mg.itu.bakerking.controller.affichage.Dispatcher;
 import mg.itu.bakerking.dto.produit.RecommandationRequest;
 import mg.itu.bakerking.service.produit.RecommandationService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.time.LocalDate;
 
 @Controller
 @AllArgsConstructor
@@ -18,11 +17,21 @@ public class RecommandationController {
 
     private RecommandationService recommandationService;
     @GetMapping
-    public ModelAndView getRecommandation() {
-        return new Dispatcher("recommandation/index").addObject("recommandations", recommandationService.getRecommandations());
+    public ModelAndView getRecommandation(@RequestParam(value = "mois", required = false) Integer mois, @RequestParam(value = "annee", required = false) Integer annee) {
+        LocalDate date = LocalDate.now();
+        if(mois == null) {
+            mois = date.getMonth().getValue();
+        }
+        if(annee == null) {
+            annee = date.getYear();
+        }
+        return new Dispatcher("recommandation/index")
+                .addObject("recommandations", recommandationService.getRecommandations(mois, annee))
+                .addObject("mois", mois)
+                .addObject("annee", annee);
     }
 
-    @GetMapping("/form")
+    @GetMapping("/form-recommandation")
     public ModelAndView form() {
         return new Dispatcher("recommandation/form").addObject("produits", recommandationService.getProduitRepo().findAll());
     }

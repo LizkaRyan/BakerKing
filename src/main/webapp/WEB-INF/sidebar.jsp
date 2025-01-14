@@ -46,5 +46,18 @@
                 </ul>
             </div>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <i class="icon-layout menu-icon"></i>
+                <span class="menu-title">Recommandation</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="/recommandations">Liste des recommandations</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="/recommandations/form-recommandation">Insertion recommandation</a></li>
+                </ul>
+            </div>
+        </li>
     </ul>
 </nav>

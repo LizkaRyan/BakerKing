@@ -19,10 +19,9 @@ public class RecommandationService {
     private RecommandationRepo recommandationRepo;
     private ProduitRepo produitRepo;
 
-    public List<Recommandation> getRecommandations() {
-        LocalDate date = LocalDate.now();
+    public List<Recommandation> getRecommandations(int mois, int annee) {
 
-        return recommandationRepo.getRecommandations(date.getMonth().getValue(), date.getYear());
+        return recommandationRepo.getRecommandations(mois, annee);
     }
 
     @Transactional

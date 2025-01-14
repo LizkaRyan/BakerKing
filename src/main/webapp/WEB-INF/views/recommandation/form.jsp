@@ -10,7 +10,7 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Insertion achats</h4>
+                <h4 class="card-title">Insertion recommandations</h4>
                 <form action="/recommandations" method="post">
                     <div class="row">
                         <div class="col-md-5">
@@ -40,8 +40,8 @@
                         </div>
                     </div>
                     <div id="achatDetails">
-                        <div class="row">
-                            <div class="col-md-6">
+                        <div class="row mb-3">
+                            <div class="col-md-5">
                                 <select name="idProduit[0]" class="form-select" aria-label="Default select example">
                                     <option selected>Produit</option>
                                     <% for (Produit produit: produits) { %>
@@ -76,10 +76,10 @@
     var id=1;
     function addDetails(){
         const achatDetail=document.getElementById("achatDetails");
-        achatDetail.innerHTML+=`<div class="row">
-                            <div class="col-md-6">
+        achatDetail.innerHTML+=`<div class="row mb-3">
+                            <div class="col-md-5">
                                 <select name="idProduit[`+id+`]" class="form-select" aria-label="Default select example">
-                                    <option selected>Open this select menu</option>
+                                    <option selected>Produit</option>
                                     <% for (Produit produit:produits) { %>
                                     <option value="<%= produit.getIdProduit() %>"><%= produit.getProduit() %></option>
                                     <% } %>

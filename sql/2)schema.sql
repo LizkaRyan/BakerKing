@@ -109,7 +109,7 @@ CREATE TABLE production(
 );
 
 CREATE TABLE recommandation(
-                               id_recommandation SERIAL,
+                               id_recommandation VARCHAR(100) default 'RCM00'||nextval('seq_recommandation'),
                                mois INT NOT NULL,
                                annee INT NOT NULL,
                                id_produit VARCHAR(100) NOT NULL,
