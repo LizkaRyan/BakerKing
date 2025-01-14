@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="mg.itu.bakerking.entity.produit.Produit" %><%
     List<Produit> produits=(List<Produit>)request.getAttribute("produits");
@@ -23,7 +24,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <select name="produits[0].idProduit" class="form-select" aria-label="Default select example">
-                                    <option selected>Ingredients</option>
+                                    <option selected>Produit</option>
                                     <% for (Produit produit:produits) { %>
                                     <option value="<%= produit.getIdProduit() %>"><%= produit.getProduit() %></option>
                                     <% } %>

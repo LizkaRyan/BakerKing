@@ -18,6 +18,8 @@ public class VenteDetails extends TransactionDetails {
     @JoinColumn(name = "id_transaction")
     private Vente vente;
 
+
+
     public VenteDetails(String idDetails,double quantite,double montant,Produit produit){
         super(idDetails,quantite,montant);
         this.setProduit(produit);

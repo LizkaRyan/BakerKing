@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-public class ProductionDTO {
-    List<ProduitDTO> stockDTO;
+public class ProductionRequest {
+    List<ProduitRequest> stockDTO;
     LocalDate date;
 }

@@ -22,6 +22,11 @@ public class Produit {
     @JoinColumn(name = "id_categorie")
     private Categorie categorie;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_type_produit")
+    private TypeProduit typeProduit;
+
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "produit")
     private List<IngredientProduit> listIngredientProduit;
 }

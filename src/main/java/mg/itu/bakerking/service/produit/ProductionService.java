@@ -2,7 +2,7 @@ package mg.itu.bakerking.service.produit;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import mg.itu.bakerking.dto.produit.ProductionDTO;
+import mg.itu.bakerking.dto.produit.ProductionRequest;
 import mg.itu.bakerking.entity.produit.IngredientProduit;
 import mg.itu.bakerking.entity.produit.Production;
 import mg.itu.bakerking.entity.stock.MvtStockProduit;
@@ -45,7 +45,7 @@ public class ProductionService {
         return valiny;
     }
 
-    public void save(ProductionDTO productionDTO){
+    public void save(ProductionRequest productionDTO){
         List<MvtStockProduit> mvtStockProduits=this.mvtProduitService.save(productionDTO);
         for (MvtStockProduit mvtStockProduit:mvtStockProduits) {
             productionRepo.save(new Production(mvtStockProduit));

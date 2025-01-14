@@ -2,10 +2,9 @@ package mg.itu.bakerking.controller.transaction;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import mg.itu.bakerking.controller.affichage.Dispatcher;
-import mg.itu.bakerking.dto.transaction.AchatDTO;
-import mg.itu.bakerking.dto.transaction.VenteDTO;
+import mg.itu.bakerking.dto.transaction.VenteRequest;
+import mg.itu.bakerking.exception.CreationVenteException;
 import mg.itu.bakerking.service.produit.ProduitService;
 import mg.itu.bakerking.service.transaction.vente.VenteService;
 import org.springframework.stereotype.Controller;
@@ -19,7 +18,7 @@ public class VenteController {
 
     private final ProduitService produitService;
     private final VenteService venteService;
-    @GetMapping("/form")
+    @GetMapping("/form_vente")
     public ModelAndView form(){
         return new Dispatcher("transaction/vente/form").addObject("produits",produitService.getRepo().findAll());
     }
@@ -34,14 +33,26 @@ public class VenteController {
         return new Dispatcher("transaction/vente/details.jsp").addObject("details",venteService.findById(idVente).getVenteDetails());
     }
     @PostMapping
-    public String save(@Valid @ModelAttribute VenteDTO venteDTO){
+    public Object save(@Valid @ModelAttribute VenteRequest venteDTO){
         try{
             this.venteService.save(venteDTO);
         }
-        catch (Exception ex){
-            throw ex;
+        catch (CreationVenteException ex){
+            return new Dispatcher("transaction/vente/form")
+                    .addObject("exception",ex)
+                    .addObject("produits",produitService.getRepo().findAll());
         }
-        return "redirect:/achat";
+        return "redirect:/vente/filter?idTypeProduit=Tous&idCategorie=Tous";
+    }
+
+    @GetMapping("/filter")
+    public ModelAndView filter(@RequestParam(value = "idTypeProduit", required = false) String idTypeProduit, @RequestParam(value = "idCategorie", required = false) String idCategorie) {
+        return new Dispatcher("transaction/vente/listFilter")
+                .addObject("details", venteService.findVenteDetailsByCategorie(idTypeProduit, idCategorie))
+                .addObject("categories", produitService.getCategorieRepo().findAll())
+                .addObject("TypeProduits", produitService.getTypeProduitRepo().findAll())
+                .addObject("idTypeProduit", idTypeProduit)
+                .addObject("idCategorie", idCategorie);
     }
 
 }

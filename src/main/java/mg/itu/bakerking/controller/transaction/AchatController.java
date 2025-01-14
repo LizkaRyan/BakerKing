@@ -3,7 +3,7 @@ package mg.itu.bakerking.controller.transaction;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import mg.itu.bakerking.controller.affichage.Dispatcher;
-import mg.itu.bakerking.dto.transaction.AchatDTO;
+import mg.itu.bakerking.dto.transaction.AchatRequest;
 import mg.itu.bakerking.service.produit.IngredientService;
 import mg.itu.bakerking.service.transaction.achat.AchatService;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ public class AchatController {
 
     private final AchatService achatService;
 
-    @GetMapping("/form")
+    @GetMapping("/form_achat")
     public ModelAndView form(){
         return new Dispatcher("transaction/achat/form").addObject("ingredients",ingredientService.getRepo().findAll());
     }
@@ -29,7 +29,7 @@ public class AchatController {
     }
 
     @PostMapping
-    public String save(@Valid @ModelAttribute AchatDTO achat){
+    public String save(@Valid @ModelAttribute AchatRequest achat){
         try{
             this.achatService.save(achat);
         }

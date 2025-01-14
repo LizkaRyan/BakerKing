@@ -1,13 +1,13 @@
 package mg.itu.bakerking.dto.transaction;
 
 import lombok.Data;
-import mg.itu.bakerking.dto.produit.IngredientDTO;
+import mg.itu.bakerking.dto.produit.IngredientRequest;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Data
-public class AchatDTO {
+public class AchatRequest {
     private LocalDate dateTransaction;
-    private List<IngredientDTO> ingredients;
+    private List<IngredientRequest> ingredients;
 }

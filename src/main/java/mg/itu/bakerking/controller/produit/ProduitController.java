@@ -2,7 +2,6 @@ package mg.itu.bakerking.controller.produit;
 
 import lombok.AllArgsConstructor;
 import mg.itu.bakerking.controller.affichage.Dispatcher;
-import mg.itu.bakerking.dto.produit.ProductionDTO;
 import mg.itu.bakerking.repository.produit.CategorieRepo;
 import mg.itu.bakerking.repository.produit.IngredientRepo;
 import mg.itu.bakerking.repository.produit.ProduitRepo;

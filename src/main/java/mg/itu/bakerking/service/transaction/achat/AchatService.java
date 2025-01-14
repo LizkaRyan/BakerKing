@@ -1,8 +1,8 @@
 package mg.itu.bakerking.service.transaction.achat;
 
 import lombok.Getter;
-import mg.itu.bakerking.dto.produit.IngredientDTO;
-import mg.itu.bakerking.dto.transaction.AchatDTO;
+import mg.itu.bakerking.dto.produit.IngredientRequest;
+import mg.itu.bakerking.dto.transaction.AchatRequest;
 import mg.itu.bakerking.entity.produit.Ingredient;
 import mg.itu.bakerking.entity.transaction.achat.Achat;
 import mg.itu.bakerking.entity.transaction.achat.AchatDetails;
@@ -29,10 +29,10 @@ public class AchatService {
         this.mvtStockIngredientService = mvtStockIngredientService;
     }
 
-    public Achat save(AchatDTO achatDTO){
+    public Achat save(AchatRequest achatDTO){
         Achat achat=new Achat(achatDTO.getDateTransaction());
         achat.setDateTransaction(achatDTO.getDateTransaction());
-        for (IngredientDTO ingredientDTO:achatDTO.getIngredients()) {
+        for (IngredientRequest ingredientDTO:achatDTO.getIngredients()) {
             Ingredient ingredient=ingredientService.getRepo().findById(ingredientDTO.getIdIngredient()).orElseThrow(()->new RuntimeException("Id Ingredient:"+ingredientDTO.getIdIngredient()+" non retrouve"));
             AchatDetails achatDetails=new AchatDetails(ingredient, ingredientDTO.getQuantite());
 

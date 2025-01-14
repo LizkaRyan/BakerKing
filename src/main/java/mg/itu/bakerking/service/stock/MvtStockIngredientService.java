@@ -1,13 +1,11 @@
 package mg.itu.bakerking.service.stock;
 
-import mg.itu.bakerking.dto.produit.IngredientDTO;
 import mg.itu.bakerking.entity.produit.Ingredient;
 import mg.itu.bakerking.entity.stock.MvtStockIngredient;
 import mg.itu.bakerking.repository.stock.MvtStockIngredientRepo;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Service
 public class MvtStockIngredientService {
