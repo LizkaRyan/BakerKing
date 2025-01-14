@@ -10,6 +10,7 @@ import mg.itu.bakerking.repository.produit.RecommandationRepo;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,6 +35,24 @@ public class RecommandationService {
 
             recommandationRepo.save(recommandation);
         }
+    }
+
+    public List<String> getMonths() {
+        List<String> list = new ArrayList<>();
+        list.add("Janvier");
+        list.add("Fevrier");
+        list.add("Mars");
+        list.add("Avril");
+        list.add("Mai");
+        list.add("Juin");
+        list.add("Juillet");
+        list.add("Aout");
+        list.add("Septembre");
+        list.add("Octobre");
+        list.add("Novembre");
+        list.add("Decembre");
+
+        return list;
     }
 
 }

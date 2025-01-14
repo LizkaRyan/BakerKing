@@ -28,7 +28,8 @@ public class RecommandationController {
         return new Dispatcher("recommandation/index")
                 .addObject("recommandations", recommandationService.getRecommandations(mois, annee))
                 .addObject("mois", mois)
-                .addObject("annee", annee);
+                .addObject("annee", annee)
+                .addObject("months", recommandationService.getMonths());
     }
 
     @GetMapping("/form-recommandation")
@@ -40,6 +41,8 @@ public class RecommandationController {
     public String insert(@ModelAttribute RecommandationRequest recommandationRequest) {
         recommandationService.save(recommandationRequest);
 
-        return "redirect:/recommandations/form";
+        return "redirect:/recommandations/form-recommandation";
     }
+
+
 }

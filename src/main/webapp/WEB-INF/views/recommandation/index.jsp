@@ -5,28 +5,20 @@
     List<Recommandation> recommandations=(List<Recommandation>)request.getAttribute("recommandations");
     int mois=(int)request.getAttribute("mois");
     int annee = (int)request.getAttribute("annee");
+    List<String> months = (List<String>) request.getAttribute("months");
 %>
 <div class="row mb-3">
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Recherche production</h4>
+                <h4 class="card-title">Recherche recommandation</h4>
                 <form action="/recommandations" method="get">
                     <div class="row mb-3">
                         <div class="col-md-5">
                             <select name="mois" class="form-select" aria-label="Default select example">
-                                <option value="1">Janvier</option>
-                                <option value="2">Fevrier</option>
-                                <option value="3">Mars</option>
-                                <option value="4">Avril</option>
-                                <option value="5">Mai</option>
-                                <option value="6">Juin</option>
-                                <option value="7">Juillet</option>
-                                <option value="8">Aout</option>
-                                <option value="9">Septembre</option>
-                                <option value="10">Octobre</option>
-                                <option value="11">Novembre</option>
-                                <option value="12">Decembre</option>
+                                <% for (int i = 0; i< months.size(); i++) { %>
+                                   <option value="<%= i+1 %>" <% if(i+1 == mois) {  %> selected <%}%>><%= months.get(i) %></option>
+                                <% } %>
                             </select>
                         </div>
                         <div class="col-md-1">
