@@ -27,7 +27,7 @@ CREATE TABLE achat(
 );
 
 CREATE TABLE type_produit(
-                             id_type_produit VARCHAR(100) default 'TPR00'||nextval('seq_type_produit'),
+                             id_type_produit VARCHAR(100) default 'PRC00'||nextval('seq_production'),
                              type_produit VARCHAR(50) NOT NULL,
                              PRIMARY KEY(id_type_produit),
                              UNIQUE(type_produit)
@@ -106,6 +106,15 @@ CREATE TABLE production(
                            id_produit VARCHAR(100) NOT NULL,
                            PRIMARY KEY(id_production),
                            FOREIGN KEY(id_produit) REFERENCES produit(id_produit)
+);
+
+CREATE TABLE recommandation(
+                               id_recommandation SERIAL,
+                               mois INT NOT NULL,
+                               annee INT NOT NULL,
+                               id_produit VARCHAR(100) NOT NULL,
+                               PRIMARY KEY(id_recommandation),
+                               FOREIGN KEY(id_produit) REFERENCES produit(id_produit)
 );
 
 CREATE TABLE ingredient_produit(
