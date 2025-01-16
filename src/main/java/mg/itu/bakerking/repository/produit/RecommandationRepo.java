@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface RecommandationRepo extends JpaRepository<Recommandation, String> {
     @Query("""
-            select r from Recommandation r where r.mois = :mois and r.annee = :annee         
+            select r from Recommandation r where (r.annee = :annee or 0 = :annee) and (0 = :mois or r.mois = :mois) order by r.mois asc           
             """)
     public List<Recommandation> getRecommandations(@Param("mois") int mois, @Param("annee") int annee);
 

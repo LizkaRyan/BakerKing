@@ -39,6 +39,7 @@ public class RecommandationService {
 
     public List<String> getMonths() {
         List<String> list = new ArrayList<>();
+        list.add("Tous");
         list.add("Janvier");
         list.add("Fevrier");
         list.add("Mars");
