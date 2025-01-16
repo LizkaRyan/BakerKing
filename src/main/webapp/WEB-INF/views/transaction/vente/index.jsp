@@ -14,6 +14,7 @@
                     <div class="row mb-3">
                         <div class="col-md-5">
                             <select name="idClient" class="form-select" aria-label="Default select example">
+                                <option value="Tous">Tous</option>
                                 <% for (int i = 0; i< clients.size(); i++) { %>
                                 <option value="<%= clients.get(i).getIdClient() %>" > <%= clients.get(i).getNom() %></option>
                                 <% } %>

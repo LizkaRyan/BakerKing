@@ -21,7 +21,7 @@ public interface VenteRepository extends JpaRepository<Vente,String> {
     public Optional<Double> findChiffreAffaire(@Param("dateMin")LocalDate dateMin,@Param("dateMax")LocalDate dateMax);
 
     @Query("""
-            select v from Vente v where v.client.idClient = :idClient and v.dateTransaction = :date
+            select v from Vente v where (v.client.idClient = :idClient or :idClient = 'Tous') and v.dateTransaction = :date 
             """)
     public List<Vente> findVente(@Param("idClient")String idClient, @Param("date")LocalDate date);
 }
