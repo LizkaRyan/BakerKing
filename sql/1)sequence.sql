@@ -16,3 +16,4 @@ CREATE SEQUENCE seq_vente;
 CREATE SEQUENCE seq_production;
 CREATE SEQUENCE seq_type_produit;
 CREATE SEQUENCE seq_recommandation;
+CREATE SEQUENCE seq_client;

@@ -12,13 +12,6 @@ CREATE TABLE categorie(
                           UNIQUE(categorie)
 );
 
-CREATE TABLE vente(
-                      id_transaction VARCHAR(100) default 'VNT00'||nextval('seq_vente'),
-                      montant DECIMAL(15,2) NOT NULL,
-                      date_transaction DATE NOT NULL,
-                      PRIMARY KEY(id_transaction)
-);
-
 CREATE TABLE achat(
                       id_transaction VARCHAR(100) default 'ACH00'||nextval('seq_achat'),
                       montant DECIMAL(15,2) NOT NULL,
@@ -27,10 +20,17 @@ CREATE TABLE achat(
 );
 
 CREATE TABLE type_produit(
-                             id_type_produit VARCHAR(100) default 'PRC00'||nextval('seq_production'),
+                             id_type_produit VARCHAR(100) default 'TPR00'||nextval('seq_production'),
                              type_produit VARCHAR(50) NOT NULL,
                              PRIMARY KEY(id_type_produit),
                              UNIQUE(type_produit)
+);
+
+CREATE TABLE Client(
+                       id_client VARCHAR(50) default 'CLT00'||nextval('seq_client'),
+                       nom VARCHAR(50) NOT NULL,
+                       PRIMARY KEY(id_client),
+                       UNIQUE(nom)
 );
 
 CREATE TABLE ingredient(
@@ -77,15 +77,13 @@ CREATE TABLE mvt_stock_produit(
                                   FOREIGN KEY(id_produit) REFERENCES produit(id_produit)
 );
 
-CREATE TABLE vente_details(
-                              id_details VARCHAR(50) default 'VTD00'||nextval('seq_vente_details'),
-                              quantite INT NOT NULL,
-                              prix_unitaire DECIMAL(15,2) NOT NULL,
-                              id_transaction VARCHAR(100) NOT NULL,
-                              id_produit VARCHAR(100) NOT NULL,
-                              PRIMARY KEY(id_details),
-                              FOREIGN KEY(id_transaction) REFERENCES vente(id_transaction),
-                              FOREIGN KEY(id_produit) REFERENCES produit(id_produit)
+CREATE TABLE vente(
+                      id_transaction VARCHAR(100) default 'VNT00'||nextval('seq_vente'),
+                      montant DECIMAL(15,2) NOT NULL,
+                      date_transaction DATE NOT NULL,
+                      id_client VARCHAR(50) NOT NULL,
+                      PRIMARY KEY(id_transaction),
+                      FOREIGN KEY(id_client) REFERENCES Client(id_client)
 );
 
 CREATE TABLE achat_details(
@@ -108,13 +106,15 @@ CREATE TABLE production(
                            FOREIGN KEY(id_produit) REFERENCES produit(id_produit)
 );
 
-CREATE TABLE recommandation(
-                               id_recommandation VARCHAR(100) default 'RCM00'||nextval('seq_recommandation'),
-                               mois INT NOT NULL,
-                               annee INT NOT NULL,
-                               id_produit VARCHAR(100) NOT NULL,
-                               PRIMARY KEY(id_recommandation),
-                               FOREIGN KEY(id_produit) REFERENCES produit(id_produit)
+CREATE TABLE vente_details(
+                              id_details VARCHAR(50) default 'VTD00'||nextval('seq_vente_details'),
+                              quantite INT NOT NULL,
+                              prix_unitaire DECIMAL(15,2) NOT NULL,
+                              id_transaction VARCHAR(100) NOT NULL,
+                              id_produit VARCHAR(100) NOT NULL,
+                              PRIMARY KEY(id_details),
+                              FOREIGN KEY(id_transaction) REFERENCES vente(id_transaction),
+                              FOREIGN KEY(id_produit) REFERENCES produit(id_produit)
 );
 
 CREATE TABLE ingredient_produit(

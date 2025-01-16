@@ -21,9 +21,9 @@ public class VenteDetailsService {
     public VenteDetails createVenteDetails(ProduitRequest produitDTO)throws InsuficientStockException {
         Produit produit = produitService.findByIdProduit(produitDTO.getIdProduit());
         double etatStock=produitService.getMvtProduitService().findEtatStock(produitDTO.getIdProduit());
-        if(etatStock< produitDTO.getQuantite()){
-            throw new InsuficientStockException(etatStock, produitDTO.getQuantite(), produit.getProduit());
-        }
+//        if(etatStock< produitDTO.getQuantite()){
+//            throw new InsuficientStockException(etatStock, produitDTO.getQuantite(), produit.getProduit());
+//        }
         return new VenteDetails("VTD00"+venteDetailRepo.findIdDetails(), produitDTO.getQuantite(),produit.getPrixUnitaire(),produit);
     }
 }

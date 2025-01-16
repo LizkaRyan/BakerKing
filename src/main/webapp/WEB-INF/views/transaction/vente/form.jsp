@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="mg.itu.bakerking.entity.produit.Produit" %><%
+<%@ page import="mg.itu.bakerking.entity.produit.Produit" %>
+<%@ page import="mg.itu.bakerking.entity.transaction.vente.Client" %><%
     List<Produit> produits=(List<Produit>)request.getAttribute("produits");
+    List<Client> clients = (List<Client>) request.getAttribute("clients");
 %>
 <div class="row">
     <div class="col-md-2">
@@ -18,6 +20,14 @@
                                 <input type="date" name="dateTransaction" class="form-control" id="floatingInput" placeholder="Date vente">
                                 <label for="floatingInput">Date vente</label>
                             </div>
+                        </div>
+                        <div class="col-md-6">
+                            <select name="idClient" class="form-select" aria-label="Default select example">
+                                <option selected>Clients</option>
+                                <% for (Client c:clients) { %>
+                                <option value="<%= c.getIdClient() %>"><%= c.getNom() %></option>
+                                <% } %>
+                            </select>
                         </div>
                     </div>
                     <div id="achatDetails">

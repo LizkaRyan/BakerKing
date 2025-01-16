@@ -10,6 +10,7 @@ import mg.itu.bakerking.entity.transaction.vente.Vente;
 import mg.itu.bakerking.entity.transaction.vente.VenteDetails;
 import mg.itu.bakerking.exception.CreationVenteException;
 import mg.itu.bakerking.exception.InsuficientStockException;
+import mg.itu.bakerking.repository.transaction.vente.ClientRepo;
 import mg.itu.bakerking.repository.transaction.vente.VenteRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,13 @@ public class VenteService {
     private VenteRepository venteRepository;
 
     private VenteDetailsService venteDetailsService;
+
+    private ClientRepo clientRepo;
+
+    public List<Vente> getVentes(String idClient, LocalDate date) {
+        List<Vente> ventes = venteRepository.findVente(idClient, date);
+        return ventes;
+    }
 
     @Transactional
     public Vente save(VenteRequest venteDTO)throws CreationVenteException{
@@ -40,7 +48,7 @@ public class VenteService {
         if(exceptions.size()!=0){
             throw new CreationVenteException(exceptions);
         }
-        Vente vente=new Vente(venteDTO.getDateTransaction(),venteDetails);
+        Vente vente=new Vente(venteDTO.getDateTransaction(),venteDetails, clientRepo.findById(venteDTO.getIdClient()).orElseThrow(()-> new RuntimeException("Id client non retrouvé")));
         return venteRepository.save(vente);
     }
 
