@@ -34,14 +34,16 @@ public class VenteController {
             date = LocalDate.now();
         }
         return new Dispatcher("transaction/vente/index").addObject("ventes", venteService.getVentes(idClient, date))
-                .addObject("clients", clientRepo.findAll());
+                .addObject("clients", clientRepo.findAll())
+                .addObject("client", idClient)
+                .addObject("date", date);
     }
 
 
 
     @GetMapping("/details/{idVente}")
     public ModelAndView listeDetails(@PathVariable("idVente")String idVente){
-        return new Dispatcher("transaction/vente/details.jsp").addObject("details",venteService.findById(idVente).getVenteDetails());
+        return new Dispatcher("transaction/vente/details").addObject("details",venteService.findById(idVente).getVenteDetails());
     }
     @PostMapping
     public Object save(@ModelAttribute VenteRequest venteDTO){

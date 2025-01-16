@@ -76,7 +76,7 @@
         achatDetail.innerHTML+=`<div class="row">
                             <div class="col-md-6">
                                 <select name="produits[`+id+`].idProduit" class="form-select" aria-label="Default select example">
-                                    <option selected>Ingredients</option>
+                                    <option selected>Produit</option>
                                     <% for (Produit produit:produits) { %>
                                     <option value="<%= produit.getIdProduit() %>"><%= produit.getProduit() %></option>
                                     <% } %>

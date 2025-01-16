@@ -16,7 +16,7 @@
                             <select name="idClient" class="form-select" aria-label="Default select example">
                                 <option value="Tous">Tous</option>
                                 <% for (int i = 0; i< clients.size(); i++) { %>
-                                <option value="<%= clients.get(i).getIdClient() %>" > <%= clients.get(i).getNom() %></option>
+                                <option value="<%= clients.get(i).getIdClient() %>" <% if(((String)request.getAttribute("client")).equals(clients.get(i).getIdClient())) {%> selected <% } %>> <%= clients.get(i).getNom() %></option>
                                 <% } %>
                             </select>
                         </div>
@@ -25,7 +25,7 @@
                         </div>
                         <div class="col-md-5">
                             <div class="form-floating mb-3">
-                                <input type="date" name="date" class="form-control" id="floatingInput" placeholder="Date">
+                                <input type="date" value="<%= request.getAttribute("date") %>" name="date" class="form-control" id="floatingInput" placeholder="Date">
                                 <label for="floatingInput">Date</label>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Liste des ventes</h4>

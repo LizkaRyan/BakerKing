@@ -42,7 +42,7 @@
             <div class="collapse" id="vente">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"><a class="nav-link" href="/vente/form_vente">Insertion vente</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/vente?idClient=CLT001&date=<%= LocalDate.now() %>">Liste des ventes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/vente?idClient=Tous&date=<%= LocalDate.now() %>">Liste des ventes</a></li>
                     <li class="nav-item"><a class="nav-link" href="/vente/filter?idTypeProduit=Tous&idCategorie=Tous">Liste vente avec filtre</a></li>
                 </ul>
             </div>

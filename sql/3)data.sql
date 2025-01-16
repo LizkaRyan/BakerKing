@@ -77,3 +77,4 @@ INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-
 INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-10', 10,'PRD008');
 
 INSERT INTO client(nom) values ('Divers'), ('Ryan');
+INSERT INTO client(nom) values ('Benjamin'), ('Anissa');
