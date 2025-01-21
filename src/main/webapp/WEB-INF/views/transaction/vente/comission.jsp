@@ -3,10 +3,11 @@
 <%@ page import="mg.itu.bakerking.entity.transaction.vente.VenteDetails" %>
 <%@ page import="mg.itu.bakerking.entity.produit.Categorie" %>
 <%@ page import="mg.itu.bakerking.entity.produit.TypeProduit" %>
-<%@ page import="mg.itu.bakerking.dto.transaction.Comission" %>
+<%@ page import="mg.itu.bakerking.dto.transaction.ComissionResponse" %>
 <%@ page import="java.time.LocalDate" %>
+<%@ page import="mg.itu.bakerking.entity.transaction.vente.Comission" %>
 <%
-    List<Comission> comissions = (List<Comission>) request.getAttribute("comissions");
+    List<ComissionResponse> comissions = (List<ComissionResponse>) request.getAttribute("comissions");
     LocalDate dateMin = (LocalDate) request.getAttribute("dateMin");
     LocalDate dateMax = (LocalDate) request.getAttribute("dateMax");
 
@@ -66,7 +67,7 @@
                     </thead>
                     <tbody>
                     <%
-                        for (Comission c:comissions) {
+                        for (ComissionResponse c:comissions) {
                     %>
                     <tr>
                         <td><%= c.getNom() %></td>

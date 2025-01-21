@@ -134,3 +134,12 @@ CREATE TABLE ingredient_produit(
                                    FOREIGN KEY(id_ingredient) REFERENCES ingredient(id_ingredient),
                                    FOREIGN KEY(id_produit) REFERENCES produit(id_produit)
 );
+
+CREATE TABLE Comission(
+                          id_Comission SERIAL,
+                          montant NUMERIC(15,2)   NOT NULL,
+                          date_comission DATE NOT NULL,
+                          id_vendeur VARCHAR(50)  NOT NULL,
+                          PRIMARY KEY(id_Comission),
+                          FOREIGN KEY(id_vendeur) REFERENCES vendeur(id_vendeur)
+);
