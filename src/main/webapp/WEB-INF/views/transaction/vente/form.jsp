@@ -1,9 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="mg.itu.bakerking.entity.produit.Produit" %>
-<%@ page import="mg.itu.bakerking.entity.transaction.vente.Client" %><%
+<%@ page import="mg.itu.bakerking.entity.transaction.vente.Client" %>
+<%@ page import="mg.itu.bakerking.entity.transaction.vente.Vendeur" %>
+<%
     List<Produit> produits=(List<Produit>)request.getAttribute("produits");
     List<Client> clients = (List<Client>) request.getAttribute("clients");
+    List<Vendeur> vendeurs = (List<Vendeur>) request.getAttribute("vendeurs");
 %>
 <div class="row">
     <div class="col-md-2">
@@ -20,6 +23,17 @@
                                 <input type="date" name="dateTransaction" class="form-control" id="floatingInput" placeholder="Date vente">
                                 <label for="floatingInput">Date vente</label>
                             </div>
+                        </div>
+
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <select name="idVendeur" class="form-select" aria-label="Default select example">
+                                <option selected>Vendeur</option>
+                                <% for (Vendeur v: vendeurs) { %>
+                                <option value="<%= v.getIdVendeur() %>"><%= v.getNom() %></option>
+                                <% } %>
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <select name="idClient" class="form-select" aria-label="Default select example">
@@ -53,7 +67,7 @@
 
                         </div>
                         <div class="col-md-3">
-                            <button class="btn btn-outline-primary" onclick="addDetails()" type="button">Ajouter ingredients</button>
+                            <button class="btn btn-outline-primary" onclick="addDetails()" type="button">Ajouter produits</button>
                         </div>
                     </div>
                     <div class="row">

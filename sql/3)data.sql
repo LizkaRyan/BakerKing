@@ -78,3 +78,5 @@ INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-
 
 INSERT INTO client(nom) values ('Divers'), ('Ryan');
 INSERT INTO client(nom) values ('Benjamin'), ('Anissa');
+
+INSERT INTO vendeur(id_vendeur, nom) values ('VND00'||nextval('seq_vendeur') ,'Vendeur1'), ('VND00'||nextval('seq_vendeur'), 'Vendeur2');

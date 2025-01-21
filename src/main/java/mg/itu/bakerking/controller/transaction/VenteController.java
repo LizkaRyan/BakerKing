@@ -25,7 +25,8 @@ public class VenteController {
     @GetMapping("/form_vente")
     public ModelAndView form(){
         return new Dispatcher("transaction/vente/form").addObject("produits",produitService.getRepo().findAll())
-                .addObject("clients", clientRepo.findAll());
+                .addObject("clients", clientRepo.findAll())
+                .addObject("vendeurs", venteService.getVendeurRepo().findAll());
     }
 
     @GetMapping
@@ -39,7 +40,17 @@ public class VenteController {
                 .addObject("date", date);
     }
 
+    @GetMapping("/comission")
+    public ModelAndView comissions(@RequestParam(value = "dateMin") LocalDate dateMin, @RequestParam(value = "dateMax") LocalDate dateMax) {
+        return new Dispatcher("transaction/vente/comission").addObject("comissions", venteService.getComissions(dateMin, dateMax))
+                .addObject("dateMin", dateMin).addObject("dateMax", dateMax);
+    }
 
+    @GetMapping("/comission/details")
+    public ModelAndView comissionDetails(@RequestParam(value = "dateMin") LocalDate dateMin, @RequestParam(value = "dateMax") LocalDate dateMax, @RequestParam(value = "idVendeur") String idVendeur) {
+        return new Dispatcher("transaction/vente/comissionDetails").addObject("ventes", venteService.getVenteRepository().getComission(dateMin, dateMax, idVendeur));
+
+    }
 
     @GetMapping("/details/{idVente}")
     public ModelAndView listeDetails(@PathVariable("idVente")String idVente){

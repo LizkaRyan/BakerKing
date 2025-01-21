@@ -1,5 +1,6 @@
 package mg.itu.bakerking.repository.transaction.vente;
 
+import mg.itu.bakerking.dto.transaction.Comission;
 import mg.itu.bakerking.entity.transaction.vente.Vente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,4 +25,16 @@ public interface VenteRepository extends JpaRepository<Vente,String> {
             select v from Vente v where (v.client.idClient = :idClient or :idClient = 'Tous') and v.dateTransaction = :date 
             """)
     public List<Vente> findVente(@Param("idClient")String idClient, @Param("date")LocalDate date);
+
+    @Query("""
+    select new mg.itu.bakerking.dto.transaction.Comission(v.vendeur.nom, cast((sum(v.montant)*5/100) as Double), v.vendeur.idVendeur) from 
+    Vente v where :dateMin <= v.dateTransaction and v.dateTransaction <= :dateMax group by v.vendeur.nom, v.vendeur.idVendeur
+    """)
+    public List<Comission> getComission(@Param("dateMin") LocalDate dateMin, @Param("dateMax") LocalDate dateMax);
+
+    @Query("""
+    select v from 
+    Vente v where :dateMin <= v.dateTransaction and v.dateTransaction <= :dateMax and v.vendeur.idVendeur = :idVendeur 
+    """)
+    public List<Vente> getComission(@Param("dateMin") LocalDate dateMin, @Param("dateMax") LocalDate dateMax, @Param("idVendeur") String idVendeur);
 }

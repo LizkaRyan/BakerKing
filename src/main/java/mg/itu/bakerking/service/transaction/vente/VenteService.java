@@ -5,12 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import mg.itu.bakerking.dto.produit.ProduitRequest;
 import mg.itu.bakerking.dto.transaction.ChiffreAffaireProduit;
+import mg.itu.bakerking.dto.transaction.Comission;
 import mg.itu.bakerking.dto.transaction.VenteRequest;
 import mg.itu.bakerking.entity.transaction.vente.Vente;
 import mg.itu.bakerking.entity.transaction.vente.VenteDetails;
 import mg.itu.bakerking.exception.CreationVenteException;
 import mg.itu.bakerking.exception.InsuficientStockException;
 import mg.itu.bakerking.repository.transaction.vente.ClientRepo;
+import mg.itu.bakerking.repository.transaction.vente.VendeurRepo;
 import mg.itu.bakerking.repository.transaction.vente.VenteRepository;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +30,16 @@ public class VenteService {
 
     private ClientRepo clientRepo;
 
+    private VendeurRepo vendeurRepo;
+
     public List<Vente> getVentes(String idClient, LocalDate date) {
         List<Vente> ventes = venteRepository.findVente(idClient, date);
         return ventes;
+    }
+
+    public List<Comission> getComissions(LocalDate dateMin, LocalDate dateMax) {
+        List<Comission> comissions = venteRepository.getComission(dateMin, dateMax);
+        return comissions;
     }
 
     @Transactional
@@ -48,7 +57,7 @@ public class VenteService {
         if(exceptions.size()!=0){
             throw new CreationVenteException(exceptions);
         }
-        Vente vente=new Vente(venteDTO.getDateTransaction(),venteDetails, clientRepo.findById(venteDTO.getIdClient()).orElseThrow(()-> new RuntimeException("Id client non retrouvé")));
+        Vente vente=new Vente(vendeurRepo.findById(venteDTO.getIdVendeur()).orElseThrow(()-> new RuntimeException("idVendeur non reconnu")), venteDTO.getDateTransaction(),venteDetails, clientRepo.findById(venteDTO.getIdClient()).orElseThrow(()-> new RuntimeException("Id client non retrouvé")));
         return venteRepository.save(vente);
     }
 

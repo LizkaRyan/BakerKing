@@ -17,4 +17,6 @@ public class VenteRequest {
     private List<ProduitRequest> produits;
 
     private String idClient;
+
+    private String idVendeur;
 }

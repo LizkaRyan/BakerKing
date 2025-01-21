@@ -77,13 +77,22 @@ CREATE TABLE mvt_stock_produit(
                                   FOREIGN KEY(id_produit) REFERENCES produit(id_produit)
 );
 
+CREATE TABLE vendeur(
+                        id_vendeur VARCHAR(50),
+                        nom VARCHAR(50),
+                        PRIMARY KEY(id_vendeur)
+);
+
+
 CREATE TABLE vente(
                       id_transaction VARCHAR(100) default 'VNT00'||nextval('seq_vente'),
                       montant DECIMAL(15,2) NOT NULL,
                       date_transaction DATE NOT NULL,
                       id_client VARCHAR(50) NOT NULL,
+                      id_vendeur VARCHAR(50) NOT NULL,
                       PRIMARY KEY(id_transaction),
-                      FOREIGN KEY(id_client) REFERENCES Client(id_client)
+                      FOREIGN KEY(id_client) REFERENCES Client(id_client),
+                      FOREIGN KEY(id_vendeur) REFERENCES vendeur(id_vendeur)
 );
 
 CREATE TABLE achat_details(

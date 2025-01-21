@@ -22,10 +22,15 @@ public class Vente extends Transaction {
     @JoinColumn(name = "id_client")
     private Client client;
 
-    public Vente(LocalDate dateTransaction,List<VenteDetails> venteDetails, Client client){
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_vendeur")
+    private Vendeur vendeur;
+
+    public Vente(Vendeur vendeur, LocalDate dateTransaction,List<VenteDetails> venteDetails, Client client){
         super(dateTransaction);
         this.setVenteDetails(venteDetails);
         this.setClient(client);
+        this.setVendeur(vendeur);
     }
 
     public void setVenteDetails(List<VenteDetails> venteDetails){
