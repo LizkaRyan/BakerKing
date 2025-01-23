@@ -143,3 +143,12 @@ CREATE TABLE Commission(
    commission NUMERIC(5,2)   NOT NULL,
    PRIMARY KEY(id_commission)
 );
+
+CREATE TABLE recommandation(
+   id_recommandation VARCHAR(50)  default 'RCM00'||nextval('seq_recommandation'),
+   mois INTEGER NOT NULL,
+   annee VARCHAR(50)  NOT NULL,
+   id_produit VARCHAR(100)  NOT NULL,
+   PRIMARY KEY(id_recommandation),
+   FOREIGN KEY(id_produit) REFERENCES produit(id_produit)
+);

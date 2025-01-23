@@ -3,15 +3,15 @@ package mg.itu.bakerking.entity.produit;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import mg.itu.bakerking.listener.produit.RecommandationListener;
 
 @Entity
 @Getter
 @Setter
-@EntityListeners(RecommandationListener.class)
 public class Recommandation {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(insertable = false)
     private String idRecommandation;
 
     private int mois;

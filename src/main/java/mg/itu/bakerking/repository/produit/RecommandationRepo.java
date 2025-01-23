@@ -11,7 +11,7 @@ public interface RecommandationRepo extends JpaRepository<Recommandation, String
     @Query("""
             select r from Recommandation r where (r.annee = :annee or 0 = :annee) and (0 = :mois or r.mois = :mois) order by r.mois asc           
             """)
-    public List<Recommandation> getRecommandations(@Param("mois") int mois, @Param("annee") int annee);
+    public List<Recommandation> getRecommandations(@Param("mois") Integer mois, @Param("annee") Integer annee);
 
     @Query(value = "select nextval('seq_recommandation')",nativeQuery = true)
     public Integer findId();
