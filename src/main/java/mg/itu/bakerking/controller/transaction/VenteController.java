@@ -34,6 +34,7 @@ public class VenteController {
         if(date == null) {
             date = LocalDate.now();
         }
+
         return new Dispatcher("transaction/vente/index").addObject("ventes", venteService.getVentes(idClient, date))
                 .addObject("clients", clientRepo.findAll())
                 .addObject("client", idClient)
