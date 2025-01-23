@@ -85,15 +85,18 @@ CREATE TABLE vendeur(
 
 
 CREATE TABLE vente(
-                      id_transaction VARCHAR(100) default 'VNT00'||nextval('seq_vente'),
-                      montant DECIMAL(15,2) NOT NULL,
-                      date_transaction DATE NOT NULL,
-                      id_client VARCHAR(50) NOT NULL,
-                      id_vendeur VARCHAR(50) NOT NULL,
-                      PRIMARY KEY(id_transaction),
-                      FOREIGN KEY(id_client) REFERENCES Client(id_client),
-                      FOREIGN KEY(id_vendeur) REFERENCES vendeur(id_vendeur)
+   id_transaction VARCHAR(100)  default 'VNT00'||nextval('seq_vente'),
+   montant NUMERIC(15,2)   NOT NULL,
+   date_transaction DATE NOT NULL,
+   id_commission VARCHAR(50)  NOT NULL,
+   id_vendeur VARCHAR(50)  NOT NULL,
+   id_client VARCHAR(50)  NOT NULL,
+   PRIMARY KEY(id_transaction),
+   FOREIGN KEY(id_commission) REFERENCES Commission(id_commission),
+   FOREIGN KEY(id_vendeur) REFERENCES vendeur(id_vendeur),
+   FOREIGN KEY(id_client) REFERENCES Client(id_client)
 );
+
 
 CREATE TABLE achat_details(
                               id_details VARCHAR(100) default 'ACD00'||nextval('seq_achat_details'),
@@ -135,11 +138,8 @@ CREATE TABLE ingredient_produit(
                                    FOREIGN KEY(id_produit) REFERENCES produit(id_produit)
 );
 
-CREATE TABLE Comission(
-                          id_Comission SERIAL,
-                          montant NUMERIC(15,2)   NOT NULL,
-                          date_comission DATE NOT NULL,
-                          id_vendeur VARCHAR(50)  NOT NULL,
-                          PRIMARY KEY(id_Comission),
-                          FOREIGN KEY(id_vendeur) REFERENCES vendeur(id_vendeur)
+CREATE TABLE Commission(
+   id_commission VARCHAR(50)  default 'COM00'||nextval('seq_commission'),
+   commission NUMERIC(5,2)   NOT NULL,
+   PRIMARY KEY(id_commission)
 );

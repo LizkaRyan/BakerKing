@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import mg.itu.bakerking.entity.transaction.Transaction;
 import mg.itu.bakerking.listener.transaction.VenteListener;
 
-import javax.lang.model.element.Name;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -26,11 +25,16 @@ public class Vente extends Transaction {
     @JoinColumn(name = "id_vendeur")
     private Vendeur vendeur;
 
-    public Vente(Vendeur vendeur, LocalDate dateTransaction,List<VenteDetails> venteDetails, Client client){
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_commission")
+    private Commission commission;
+
+    public Vente(Vendeur vendeur, LocalDate dateTransaction,List<VenteDetails> venteDetails, Client client,Commission commission){
         super(dateTransaction);
         this.setVenteDetails(venteDetails);
         this.setClient(client);
         this.setVendeur(vendeur);
+        this.setCommission(commission);
     }
 
     public void setVenteDetails(List<VenteDetails> venteDetails){

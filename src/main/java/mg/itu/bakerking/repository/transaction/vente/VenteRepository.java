@@ -17,6 +17,15 @@ public interface VenteRepository extends JpaRepository<Vente,String> {
     public Long findId();
 
     @Query("""
+            select 
+            new mg.itu.bakerking.dto.transaction.ComissionResponse(v.vendeur.nom,cast(sum(v.montant*v.commission.commission/100) as Double),v.vendeur.idVendeur) 
+            from Vente v
+            where :dateMin <= v.dateTransaction and v.dateTransaction <= :dateMax
+            group by v.vendeur.nom,v.vendeur.idVendeur
+            """)
+    public List<ComissionResponse> findCommission(@Param("dateMin")LocalDate dateMin,@Param("dateMax")LocalDate dateMax);
+
+    @Query("""
             select sum(v.montant) from Vente v where :dateMin < v.dateTransaction and v.dateTransaction <= :dateMax
             """)
     public Optional<Double> findChiffreAffaire(@Param("dateMin")LocalDate dateMin,@Param("dateMax")LocalDate dateMax);

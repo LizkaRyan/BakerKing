@@ -5,7 +5,7 @@
 <%@ page import="mg.itu.bakerking.entity.produit.TypeProduit" %>
 <%@ page import="mg.itu.bakerking.dto.transaction.ComissionResponse" %>
 <%@ page import="java.time.LocalDate" %>
-<%@ page import="mg.itu.bakerking.entity.transaction.vente.Comission" %>
+<%@ page import="mg.itu.bakerking.entity.transaction.vente.Commission" %>
 <%
     List<ComissionResponse> comissions = (List<ComissionResponse>) request.getAttribute("comissions");
     LocalDate dateMin = (LocalDate) request.getAttribute("dateMin");

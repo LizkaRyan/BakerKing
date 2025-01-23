@@ -8,13 +8,13 @@ import mg.itu.bakerking.dto.produit.ProduitRequest;
 import mg.itu.bakerking.dto.transaction.ChiffreAffaireProduit;
 import mg.itu.bakerking.dto.transaction.ComissionResponse;
 import mg.itu.bakerking.dto.transaction.VenteRequest;
-import mg.itu.bakerking.entity.transaction.vente.Comission;
+import mg.itu.bakerking.entity.transaction.vente.Commission;
 import mg.itu.bakerking.entity.transaction.vente.Vente;
 import mg.itu.bakerking.entity.transaction.vente.VenteDetails;
 import mg.itu.bakerking.exception.CreationVenteException;
 import mg.itu.bakerking.exception.InsuficientStockException;
 import mg.itu.bakerking.repository.transaction.vente.ClientRepo;
-import mg.itu.bakerking.repository.transaction.vente.ComissionRepo;
+import mg.itu.bakerking.repository.transaction.vente.CommissionRepo;
 import mg.itu.bakerking.repository.transaction.vente.VendeurRepo;
 import mg.itu.bakerking.repository.transaction.vente.VenteRepository;
 import org.springframework.stereotype.Service;
@@ -35,10 +35,10 @@ public class VenteService {
 
     private VendeurRepo vendeurRepo;
 
-    private ComissionRepo comissionRepo;
+    private CommissionRepo commissionRepo;
 
     @Setter
-    private static double comission = 5;
+    private static double commission = 5;
 
     public List<Vente> getVentes(String idClient, LocalDate date) {
         List<Vente> ventes = venteRepository.findVente(idClient, date);
@@ -46,7 +46,7 @@ public class VenteService {
     }
 
     public List<ComissionResponse> getComissions(LocalDate dateMin, LocalDate dateMax) {
-        List<ComissionResponse> comissions = comissionRepo.getComissions(dateMin, dateMax);
+        List<ComissionResponse> comissions = venteRepository.findCommission(dateMin, dateMax);
         return comissions;
     }
 
@@ -54,8 +54,6 @@ public class VenteService {
     public Vente save(VenteRequest venteDTO)throws CreationVenteException{
         List<VenteDetails> venteDetails=new ArrayList<>();
         List<InsuficientStockException> exceptions=new ArrayList<InsuficientStockException>();
-        Comission comission = new Comission();
-        comission.setVendeur(vendeurRepo.findById(venteDTO.getIdVendeur()).orElseThrow(()-> new RuntimeException("idVendeur non reconnu")));
 
         for (ProduitRequest produitDTO: venteDTO.getProduits()) {
             try{
@@ -68,12 +66,12 @@ public class VenteService {
         if(exceptions.size()!=0){
             throw new CreationVenteException(exceptions);
         }
-        Vente vente=new Vente(vendeurRepo.findById(venteDTO.getIdVendeur()).orElseThrow(()-> new RuntimeException("idVendeur non reconnu")), venteDTO.getDateTransaction(),venteDetails, clientRepo.findById(venteDTO.getIdClient()).orElseThrow(()-> new RuntimeException("Id client non retrouvé")));
-        comission.setDateComission(vente.getDateTransaction());
-        comission.setMontant(vente.getMontant()*this.comission/100.0);
-
-        comissionRepo.save(comission);
-
+        Vente vente=new Vente(
+                vendeurRepo.findById(venteDTO.getIdVendeur()).orElseThrow(()-> new RuntimeException("idVendeur non reconnu")),
+                venteDTO.getDateTransaction(),
+                venteDetails,
+                clientRepo.findById(venteDTO.getIdClient()).orElseThrow(()-> new RuntimeException("Id client non retrouvé")),
+                commissionRepo.findCommissionByCommission(this.commission).orElse(new Commission(this.commission)));
         return venteRepository.save(vente);
     }
 
