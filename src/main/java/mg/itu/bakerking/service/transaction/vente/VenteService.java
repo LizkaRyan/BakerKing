@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import mg.itu.bakerking.dto.produit.ProduitRequest;
 import mg.itu.bakerking.dto.transaction.ChiffreAffaireProduit;
+import mg.itu.bakerking.dto.transaction.ComissionGenreResponse;
 import mg.itu.bakerking.dto.transaction.ComissionResponse;
 import mg.itu.bakerking.dto.transaction.VenteRequest;
 import mg.itu.bakerking.entity.transaction.vente.Commission;
@@ -50,6 +51,18 @@ public class VenteService {
         return comissions;
     }
 
+    public List<ComissionGenreResponse> getComissionGenre(LocalDate dateMin, LocalDate dateMax) {
+
+        return venteRepository.findCommissionByGenre(dateMin, dateMax);
+
+    }
+
+    public List<Vente> getComissionGenre(LocalDate dateMin, LocalDate dateMax, String idGenre) {
+
+        return venteRepository.getComissionByGenre(dateMin, dateMax, idGenre);
+
+    }
+
     @Transactional
     public Vente save(VenteRequest venteDTO)throws CreationVenteException{
         List<VenteDetails> venteDetails=new ArrayList<>();
@@ -66,12 +79,20 @@ public class VenteService {
         if(exceptions.size()!=0){
             throw new CreationVenteException(exceptions);
         }
+
         Vente vente=new Vente(
                 vendeurRepo.findById(venteDTO.getIdVendeur()).orElseThrow(()-> new RuntimeException("idVendeur non reconnu")),
                 venteDTO.getDateTransaction(),
                 venteDetails,
-                clientRepo.findById(venteDTO.getIdClient()).orElseThrow(()-> new RuntimeException("Id client non retrouvé")),
-                commissionRepo.findCommissionByCommission(this.commission).orElse(new Commission(this.commission)));
+                clientRepo.findById(venteDTO.getIdClient()).orElseThrow(()-> new RuntimeException("Id client non retrouvé")));
+        double comission = this.commission;
+        if(vente.getMontant() <= 200_000){
+            comission = 0;
+        }
+
+        Commission commission1 = commissionRepo.findCommissionByCommission(comission).orElse(new Commission(comission));
+
+        vente.setCommission(commission1);
         return venteRepository.save(vente);
     }
 

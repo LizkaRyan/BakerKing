@@ -1,8 +1,6 @@
 package mg.itu.bakerking.entity.transaction.vente;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,4 +13,8 @@ public class Vendeur {
     @GeneratedValue
     private String idVendeur;
     private String nom;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_genre")
+    private Genre genre;
 }

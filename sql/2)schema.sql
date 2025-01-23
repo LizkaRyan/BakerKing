@@ -77,12 +77,27 @@ CREATE TABLE mvt_stock_produit(
                                   FOREIGN KEY(id_produit) REFERENCES produit(id_produit)
 );
 
-CREATE TABLE vendeur(
-                        id_vendeur VARCHAR(50),
-                        nom VARCHAR(50),
-                        PRIMARY KEY(id_vendeur)
+CREATE TABLE genre(
+                      id_genre VARCHAR(50) default 'GNR00'||nextval('seq_genre'),
+                      genre VARCHAR(50)  NOT NULL,
+                      PRIMARY KEY(id_genre),
+                      UNIQUE(genre)
 );
 
+CREATE TABLE vendeur(
+                        id_vendeur VARCHAR(50) default 'VND00'||nextval('seq_vendeur'),
+                        nom VARCHAR(50) ,
+                        id_genre VARCHAR(50)  NOT NULL,
+                        PRIMARY KEY(id_vendeur),
+                        FOREIGN KEY(id_genre) REFERENCES genre(id_genre)
+);
+
+
+CREATE TABLE Commission(
+                           id_commission VARCHAR(50)  default 'COM00'||nextval('seq_commission'),
+                           commission NUMERIC(5,2)   NOT NULL,
+                           PRIMARY KEY(id_commission)
+);
 
 CREATE TABLE vente(
    id_transaction VARCHAR(100)  default 'VNT00'||nextval('seq_vente'),
@@ -136,12 +151,6 @@ CREATE TABLE ingredient_produit(
                                    PRIMARY KEY(id_ingredient, id_produit),
                                    FOREIGN KEY(id_ingredient) REFERENCES ingredient(id_ingredient),
                                    FOREIGN KEY(id_produit) REFERENCES produit(id_produit)
-);
-
-CREATE TABLE Commission(
-   id_commission VARCHAR(50)  default 'COM00'||nextval('seq_commission'),
-   commission NUMERIC(5,2)   NOT NULL,
-   PRIMARY KEY(id_commission)
 );
 
 CREATE TABLE recommandation(

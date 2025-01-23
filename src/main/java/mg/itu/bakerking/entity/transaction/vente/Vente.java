@@ -29,9 +29,10 @@ public class Vente extends Transaction {
     @JoinColumn(name = "id_commission")
     private Commission commission;
 
-    public Vente(Vendeur vendeur, LocalDate dateTransaction,List<VenteDetails> venteDetails, Client client,Commission commission){
+    public Vente(Vendeur vendeur, LocalDate dateTransaction,List<VenteDetails> venteDetails, Client client){
         super(dateTransaction);
         this.setVenteDetails(venteDetails);
+
         this.setClient(client);
         this.setVendeur(vendeur);
         this.setCommission(commission);

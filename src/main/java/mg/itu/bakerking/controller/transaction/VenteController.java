@@ -43,12 +43,21 @@ public class VenteController {
     @GetMapping("/comission")
     public ModelAndView comissions(@RequestParam(value = "dateMin") LocalDate dateMin, @RequestParam(value = "dateMax") LocalDate dateMax) {
         return new Dispatcher("transaction/vente/comission").addObject("comissions", venteService.getComissions(dateMin, dateMax))
+                .addObject("comissionGenre", venteService.getComissionGenre(dateMin, dateMax))
                 .addObject("dateMin", dateMin).addObject("dateMax", dateMax);
     }
+
 
     @GetMapping("/comission/details")
     public ModelAndView comissionDetails(@RequestParam(value = "dateMin") LocalDate dateMin, @RequestParam(value = "dateMax") LocalDate dateMax, @RequestParam(value = "idVendeur") String idVendeur) {
         return new Dispatcher("transaction/vente/comissionDetails").addObject("ventes", venteService.getVenteRepository().getComission(dateMin, dateMax, idVendeur));
+
+    }
+
+
+    @GetMapping("/comission/details/genre")
+    public ModelAndView comissionDetailsGenre(@RequestParam(value = "dateMin") LocalDate dateMin, @RequestParam(value = "dateMax") LocalDate dateMax, @RequestParam(value = "idGenre") String idGenre) {
+        return new Dispatcher("transaction/vente/comissionDetails").addObject("ventes", venteService.getVenteRepository().getComissionByGenre(dateMin, dateMax, idGenre));
 
     }
 

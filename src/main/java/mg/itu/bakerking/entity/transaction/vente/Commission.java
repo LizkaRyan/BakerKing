@@ -14,6 +14,8 @@ public class Commission {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(insertable = false)
     private String idCommission;
+
+    @Setter
     private double commission;
 
     public Commission(double commission){
