@@ -17,9 +17,25 @@ public class Vente extends Transaction {
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "vente")
     protected List<VenteDetails> venteDetails;
 
-    public Vente(LocalDate dateTransaction,List<VenteDetails> venteDetails){
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_client")
+    private Client client;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_vendeur")
+    private Vendeur vendeur;
+
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_commission")
+    private Commission commission;
+
+    public Vente(Vendeur vendeur, LocalDate dateTransaction,List<VenteDetails> venteDetails, Client client){
         super(dateTransaction);
         this.setVenteDetails(venteDetails);
+
+        this.setClient(client);
+        this.setVendeur(vendeur);
+        this.setCommission(commission);
     }
 
     public void setVenteDetails(List<VenteDetails> venteDetails){

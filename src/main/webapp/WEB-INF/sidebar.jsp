@@ -1,3 +1,4 @@
+<%@ page import="java.time.LocalDate" %>
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
         <li class="nav-item">
@@ -41,9 +42,11 @@
             <div class="collapse" id="vente">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"><a class="nav-link" href="/vente/form_vente">Insertion vente</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/vente">Liste des ventes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/vente?idClient=Tous&date=<%= LocalDate.now() %>">Liste des ventes</a></li>
                     <li class="nav-item"><a class="nav-link" href="/vente/filter?idTypeProduit=Tous&idCategorie=Tous">Liste vente avec filtre</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/vente/comission?dateMin=2024-12-31&dateMax=<%= LocalDate.now() %>">Comission</a></li>
                 </ul>
+
             </div>
         </li>
         <li class="nav-item">

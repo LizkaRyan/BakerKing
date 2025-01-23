@@ -15,4 +15,8 @@ public class VenteRequest {
     private LocalDate dateTransaction;
     @Valid
     private List<ProduitRequest> produits;
+
+    private String idClient;
+
+    private String idVendeur;
 }

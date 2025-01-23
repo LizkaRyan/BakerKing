@@ -75,3 +75,10 @@ INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-
 INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-08', 5,'PRD005');
 INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-08', 5,'PRD006');
 INSERT INTO production(date_production, quantite, id_produit) VALUES ( '2025-01-10', 10,'PRD008');
+
+INSERT INTO client(nom) values ('Divers'), ('Ryan');
+INSERT INTO client(nom) values ('Benjamin'), ('Anissa');
+
+INSERT INTO vendeur(nom, id_genre) values ('Vendeur 1', 'GNR001'), ('Vendeur 2', 'GNR002');
+
+INSERT INTO genre(genre) values ('Masculin'), ('Feminin');

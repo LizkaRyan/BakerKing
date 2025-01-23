@@ -16,8 +16,10 @@
                     <div class="row mb-3">
                         <div class="col-md-5">
                             <select name="mois" class="form-select" aria-label="Default select example">
-                                <% for (int i = 0; i< months.size(); i++) { %>
-                                   <option value="<%= i+1 %>" <% if(i+1 == mois) {  %> selected <%}%>><%= months.get(i) %></option>
+                                <% for (int i = 0; i< months.size(); i++) {
+                                %>
+
+                                   <option value="<%= i %>" <% if(i== mois) {  %> selected <%}%>><%= months.get(i) %></option>
                                 <% } %>
                             </select>
                         </div>
@@ -53,6 +55,8 @@
                     <tr>
                         <th>Produit</th>
                         <th>Prix unitaire</th>
+                        <th>Mois</th>
+                        <th>Annee</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -62,6 +66,8 @@
                     <tr>
                         <td><%= recommandation.getProduit().getProduit() %></td>
                         <td><%= recommandation.getProduit().getPrixUnitaire() %></td>
+                        <td><%= months.get(recommandation.getMois()) %></td>
+                        <td><%= recommandation.getAnnee()%></td>
                     </tr>
                     <% } %>
                     </tbody>

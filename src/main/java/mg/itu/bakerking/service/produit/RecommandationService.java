@@ -20,7 +20,7 @@ public class RecommandationService {
     private RecommandationRepo recommandationRepo;
     private ProduitRepo produitRepo;
 
-    public List<Recommandation> getRecommandations(int mois, int annee) {
+    public List<Recommandation> getRecommandations(Integer mois, Integer annee) {
 
         return recommandationRepo.getRecommandations(mois, annee);
     }
@@ -39,6 +39,7 @@ public class RecommandationService {
 
     public List<String> getMonths() {
         List<String> list = new ArrayList<>();
+        list.add("Tous");
         list.add("Janvier");
         list.add("Fevrier");
         list.add("Mars");
