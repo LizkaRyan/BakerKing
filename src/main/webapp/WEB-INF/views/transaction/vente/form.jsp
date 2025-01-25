@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="mg.itu.bakerking.entity.produit.Produit" %>
-<%@ page import="mg.itu.bakerking.entity.transaction.vente.Client" %>
-<%@ page import="mg.itu.bakerking.entity.transaction.vente.Vendeur" %>
+<%@ page import="mg.itu.bakerking.entity.personne.Client" %>
+<%@ page import="mg.itu.bakerking.entity.personne.Vendeur" %>
 <%
     List<Produit> produits=(List<Produit>)request.getAttribute("produits");
     List<Client> clients = (List<Client>) request.getAttribute("clients");

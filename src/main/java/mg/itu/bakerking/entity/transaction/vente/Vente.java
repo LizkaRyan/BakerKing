@@ -3,6 +3,8 @@ package mg.itu.bakerking.entity.transaction.vente;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mg.itu.bakerking.entity.personne.Client;
+import mg.itu.bakerking.entity.personne.Vendeur;
 import mg.itu.bakerking.entity.transaction.Transaction;
 import mg.itu.bakerking.listener.transaction.VenteListener;
 
