@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import mg.itu.bakerking.dto.produit.ProduitRequest;
 import mg.itu.bakerking.dto.transaction.ChiffreAffaireProduit;
-import mg.itu.bakerking.dto.transaction.ComissionGenreResponse;
+import mg.itu.bakerking.dto.transaction.CommissionGenre;
 import mg.itu.bakerking.dto.transaction.ComissionResponse;
 import mg.itu.bakerking.dto.transaction.VenteRequest;
 import mg.itu.bakerking.entity.transaction.vente.Commission;
@@ -51,7 +51,7 @@ public class VenteService {
         return comissions;
     }
 
-    public List<ComissionGenreResponse> getComissionGenre(LocalDate dateMin, LocalDate dateMax) {
+    public List<CommissionGenre> getComissionGenre(LocalDate dateMin, LocalDate dateMax) {
 
         return venteRepository.findCommissionByGenre(dateMin, dateMax);
 

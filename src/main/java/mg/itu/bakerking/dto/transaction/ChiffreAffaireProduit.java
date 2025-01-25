@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ChiffreAffaireProduit {
+    private String idProduit;
     private String produit;
     private double chiffreAffaire;
 }

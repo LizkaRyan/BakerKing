@@ -1,8 +1,8 @@
 package mg.itu.bakerking.dto;
 
-import lombok.Data;
 import lombok.Getter;
 import mg.itu.bakerking.dto.transaction.ChiffreAffaireProduit;
+import mg.itu.bakerking.dto.transaction.CommissionGenre;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class Chart {
 
     public Chart(List<Double> data, List<String> labels, String label){
         this.borderWidth=1;
-        this.fill=false;
+        this.fill=true;
         this.labels=labels;
         this.datasets.add(new Datasets(data,label));
     }
@@ -30,8 +30,20 @@ public class Chart {
         }
         return new Chart(data,labels,"Chiffre d'affaire");
     }
+
+    public static Chart getCommissionChart(List<CommissionGenre> commissionGenres){
+        List<Double> data=new ArrayList<Double>();
+        List<String> labels=new ArrayList<String>();
+        for (CommissionGenre commissionGenre: commissionGenres) {
+            data.add(commissionGenre.getMontant());
+            labels.add(commissionGenre.getGenre());
+        }
+        return new Chart(data,labels,"Commission par genre");
+    }
+
     @Getter
     public class Datasets{
+        protected static List<String> backColor;
         String label;
         List<Double> data;
         List<String> backgroundColor = new ArrayList<String>();
@@ -44,14 +56,17 @@ public class Chart {
         }
 
         public static List<String> getBackColor(){
-            List<String> response = new ArrayList<String>();
-            response.add("rgba(255, 99, 132, 0.2)");
-            response.add("rgba(54, 162, 235, 0.2)");
-            response.add("rgba(255, 206, 86, 0.2)");
-            response.add("rgba(75, 192, 192, 0.2)");
-            response.add("rgba(153, 102, 255, 0.2)");
-            response.add("rgba(255, 159, 64, 0.2)");
-            return response;
+            if(backColor==null){
+                List<String> response = new ArrayList<String>();
+                response.add("rgba(255, 99, 132, 0.2)");
+                response.add("rgba(54, 162, 235, 0.2)");
+                response.add("rgba(255, 206, 86, 0.2)");
+                response.add("rgba(75, 192, 192, 0.2)");
+                response.add("rgba(153, 102, 255, 0.2)");
+                response.add("rgba(255, 159, 64, 0.2)");
+                backColor=response;
+            }
+            return backColor;
         }
 
         protected void setColor(){

@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ComissionGenreResponse {
+public class CommissionGenre {
 
     private String idGenre;
     private String genre;
