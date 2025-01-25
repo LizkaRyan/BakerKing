@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import mg.itu.bakerking.dto.Config;
 import mg.itu.bakerking.dto.produit.ProduitRequest;
 import mg.itu.bakerking.dto.transaction.ChiffreAffaireProduit;
 import mg.itu.bakerking.dto.transaction.CommissionGenre;
@@ -18,8 +19,10 @@ import mg.itu.bakerking.repository.transaction.vente.ClientRepo;
 import mg.itu.bakerking.repository.transaction.vente.CommissionRepo;
 import mg.itu.bakerking.repository.transaction.vente.VendeurRepo;
 import mg.itu.bakerking.repository.transaction.vente.VenteRepository;
+import mg.itu.bakerking.service.ConfigService;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +41,7 @@ public class VenteService {
 
     private CommissionRepo commissionRepo;
 
-    @Setter
-    private static double commission = 5;
+    private ConfigService configService;
 
     public List<Vente> getVentes(String idClient, LocalDate date) {
         List<Vente> ventes = venteRepository.findVente(idClient, date);
@@ -64,7 +66,7 @@ public class VenteService {
     }
 
     @Transactional
-    public Vente save(VenteRequest venteDTO)throws CreationVenteException{
+    public Vente save(VenteRequest venteDTO)throws CreationVenteException, IOException {
         List<VenteDetails> venteDetails=new ArrayList<>();
         List<InsuficientStockException> exceptions=new ArrayList<InsuficientStockException>();
 
@@ -85,8 +87,9 @@ public class VenteService {
                 venteDTO.getDateTransaction(),
                 venteDetails,
                 clientRepo.findById(venteDTO.getIdClient()).orElseThrow(()-> new RuntimeException("Id client non retrouvé")));
-        double comission = this.commission;
-        if(vente.getMontant() <= 200_000){
+        Config config=configService.readProperty();
+        double comission = config.getCommissiontaux();
+        if(vente.getMontant() <= config.getCommissionMin()){
             comission = 0;
         }
 
