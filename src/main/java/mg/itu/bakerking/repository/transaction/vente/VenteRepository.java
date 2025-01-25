@@ -1,6 +1,6 @@
 package mg.itu.bakerking.repository.transaction.vente;
 
-import mg.itu.bakerking.dto.transaction.ComissionGenreResponse;
+import mg.itu.bakerking.dto.transaction.CommissionGenre;
 import mg.itu.bakerking.dto.transaction.ComissionResponse;
 import mg.itu.bakerking.entity.transaction.vente.Vente;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -50,17 +50,17 @@ public interface VenteRepository extends JpaRepository<Vente,String> {
 
     @Query("""
     select v from 
-    Vente v where :dateMin <= v.dateTransaction and v.dateTransaction <= :dateMax and v.vendeur.genre.idGenre=:idGenre 
+    Vente v where :dateMin <= v.dateTransaction and v.dateTransaction <= :dateMax and v.vendeur.genre.genre=:genre 
     """)
-    public List<Vente> getComissionByGenre(@Param("dateMin") LocalDate dateMin, @Param("dateMax") LocalDate dateMax, @Param("idGenre") String idGenre);
+    public List<Vente> getComissionByGenre(@Param("dateMin") LocalDate dateMin, @Param("dateMax") LocalDate dateMax, @Param("genre") String genre);
 
     @Query("""
             select 
-            new mg.itu.bakerking.dto.transaction.ComissionGenreResponse(v.vendeur.genre.idGenre ,v.vendeur.genre.genre, cast(SUM(v.montant*v.commission.commission/100) as Double)) 
+            new mg.itu.bakerking.dto.transaction.CommissionGenre(v.vendeur.genre.idGenre ,v.vendeur.genre.genre, cast(SUM(v.montant*v.commission.commission/100) as Double)) 
             from Vente v
             where :dateMin <= v.dateTransaction and v.dateTransaction <= :dateMax
             group by v.vendeur.genre.genre, v.vendeur.genre.idGenre
             """)
-    public List<ComissionGenreResponse> findCommissionByGenre(@Param("dateMin")LocalDate dateMin, @Param("dateMax")LocalDate dateMax);
+    public List<CommissionGenre> findCommissionByGenre(@Param("dateMin")LocalDate dateMin, @Param("dateMax")LocalDate dateMax);
 
 }

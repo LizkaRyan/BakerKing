@@ -1,8 +1,11 @@
 package mg.itu.bakerking.controller.transaction;
 
-import jakarta.validation.Valid;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import mg.itu.bakerking.controller.affichage.Dispatcher;
+import mg.itu.bakerking.dto.Chart;
+import mg.itu.bakerking.dto.transaction.CommissionGenre;
 import mg.itu.bakerking.dto.transaction.VenteRequest;
 import mg.itu.bakerking.exception.CreationVenteException;
 import mg.itu.bakerking.repository.transaction.vente.ClientRepo;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
@@ -42,10 +46,12 @@ public class VenteController {
     }
 
     @GetMapping("/comission")
-    public ModelAndView comissions(@RequestParam(value = "dateMin") LocalDate dateMin, @RequestParam(value = "dateMax") LocalDate dateMax) {
+    public ModelAndView comissions(@RequestParam(value = "dateMin") LocalDate dateMin, @RequestParam(value = "dateMax") LocalDate dateMax) throws JsonProcessingException {
+        List<CommissionGenre> commissionGenres = venteService.getComissionGenre(dateMin, dateMax);
         return new Dispatcher("transaction/vente/comission").addObject("comissions", venteService.getComissions(dateMin, dateMax))
-                .addObject("comissionGenre", venteService.getComissionGenre(dateMin, dateMax))
-                .addObject("dateMin", dateMin).addObject("dateMax", dateMax);
+                .addObject("comissionGenre", commissionGenres)
+                .addObject("dateMin", dateMin).addObject("dateMax", dateMax)
+                .addObject("chart",new ObjectMapper().writeValueAsString(Chart.getCommissionChart(commissionGenres)));
     }
 
 
@@ -57,8 +63,8 @@ public class VenteController {
 
 
     @GetMapping("/comission/details/genre")
-    public ModelAndView comissionDetailsGenre(@RequestParam(value = "dateMin") LocalDate dateMin, @RequestParam(value = "dateMax") LocalDate dateMax, @RequestParam(value = "idGenre") String idGenre) {
-        return new Dispatcher("transaction/vente/comissionDetails").addObject("ventes", venteService.getVenteRepository().getComissionByGenre(dateMin, dateMax, idGenre));
+    public ModelAndView comissionDetailsGenre(@RequestParam(value = "dateMin") LocalDate dateMin, @RequestParam(value = "dateMax") LocalDate dateMax, @RequestParam(value = "genre") String genre) {
+        return new Dispatcher("transaction/vente/comissionDetails").addObject("ventes", venteService.getVenteRepository().getComissionByGenre(dateMin, dateMax, genre));
 
     }
 

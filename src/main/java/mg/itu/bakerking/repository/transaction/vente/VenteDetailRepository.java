@@ -23,11 +23,11 @@ public interface VenteDetailRepository extends JpaRepository<VenteDetails, Strin
 
     @Query("""
             select 
-            new mg.itu.bakerking.dto.transaction.ChiffreAffaireProduit(vd.produit.produit,cast(sum(vd.prixUnitaire*vd.quantite) as Double)) 
+            new mg.itu.bakerking.dto.transaction.ChiffreAffaireProduit(vd.produit.idProduit,vd.produit.produit,cast(sum(vd.prixUnitaire*vd.quantite) as Double)) 
             from VenteDetails vd 
             inner join vd.vente v 
             where :dateMin < v.dateTransaction and v.dateTransaction <= :dateMax
-            group by vd.produit.produit
+            group by vd.produit.produit,vd.produit.idProduit
             """)
     public List<ChiffreAffaireProduit> findChiffreAffaireEachProduct(@Param("dateMin")LocalDate dateMin, @Param("dateMax")LocalDate dateMax);
 }
