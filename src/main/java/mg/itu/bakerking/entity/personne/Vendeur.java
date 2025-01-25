@@ -1,4 +1,4 @@
-package mg.itu.bakerking.entity.transaction.vente;
+package mg.itu.bakerking.entity.personne;
 
 import jakarta.persistence.*;
 import lombok.Getter;

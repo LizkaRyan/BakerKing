@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -81,6 +82,9 @@ public class VenteController {
             return new Dispatcher("transaction/vente/form")
                     .addObject("exception",ex)
                     .addObject("produits",produitService.getRepo().findAll());
+        }
+        catch (IOException ex){
+            ex.printStackTrace();
         }
         return "redirect:/vente/filter?idTypeProduit=Tous&idCategorie=Tous";
     }

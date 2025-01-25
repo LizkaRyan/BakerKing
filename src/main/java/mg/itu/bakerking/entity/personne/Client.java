@@ -1,4 +1,4 @@
-package mg.itu.bakerking.entity.transaction.vente;
+package mg.itu.bakerking.entity.personne;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,11 +9,12 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Genre {
+public class Client {
 
     @Id
     @GeneratedValue
-    private String idGenre;
+    private String idClient;
 
-    private String genre;
+    private String nom;
+
 }
