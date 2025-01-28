@@ -62,5 +62,18 @@
                 </ul>
             </div>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#produit" aria-expanded="false" aria-controls="ui-basic">
+                <i class="icon-layout menu-icon"></i>
+                <span class="menu-title">Produit</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="production">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="/produit/historique/prix?idProduit=PRD001">Historique</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="/produit/prix">Modification Prix</a></li>
+                </ul>
+            </div>
+        </li>
     </ul>
 </nav>
