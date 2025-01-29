@@ -1,11 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="mg.itu.bakerking.entity.transaction.achat.Achat" %>
-<%@ page import="mg.itu.bakerking.entity.produit.Recommandation" %>
 <%@ page import="mg.itu.bakerking.entity.produit.Produit" %>
 <%@ page import="mg.itu.bakerking.entity.produit.PrixProduit" %><%
     List<Produit> produits=(List<Produit>)request.getAttribute("produits");
     List<PrixProduit> prixProduits = (List<PrixProduit>) request.getAttribute("historique");
+    String idProduit = (String) request.getAttribute("idProduit");
 %>
 <div class="row mb-3">
     <div class="col-md-6">
@@ -19,7 +18,7 @@
                                 <% for (int i = 0; i< produits.size(); i++) {
                                 %>
 
-                                <option value="<%= produits.get(i).getIdProduit() %>" ><%= produits.get(i).getProduit() %></option>
+                                <option value="<%= produits.get(i).getIdProduit() %>" <% if(produits.get(i).getIdProduit().equals(idProduit)) { %> selected <% } %>><%= produits.get(i).getProduit() %></option>
                                 <% } %>
                             </select>
                         </div>

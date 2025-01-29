@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface PrixProduitRepo extends JpaRepository<PrixProduit, String> {
 
-    @Query("select p from PrixProduit p where p.datePrix < :datePrix and p.produit.idProduit = :idProduit order by p.datePrix desc")
+    @Query("select p from PrixProduit p where p.datePrix <= :datePrix and p.produit.idProduit = :idProduit order by p.datePrix desc")
     public List<PrixProduit> getPrixProduit(@Param("datePrix") LocalDate datePrix, @Param("idProduit") String idProduit);
 
     @Query("""
