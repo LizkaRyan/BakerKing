@@ -72,7 +72,7 @@ public class VenteService {
 
         for (ProduitRequest produitDTO: venteDTO.getProduits()) {
             try{
-                venteDetails.add(venteDetailsService.createVenteDetails(produitDTO));
+                venteDetails.add(venteDetailsService.createVenteDetails(produitDTO, venteDTO.getDateTransaction()));
             }
             catch (InsuficientStockException ex){
                 exceptions.add(ex);

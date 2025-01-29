@@ -161,3 +161,12 @@ CREATE TABLE recommandation(
    PRIMARY KEY(id_recommandation),
    FOREIGN KEY(id_produit) REFERENCES produit(id_produit)
 );
+
+CREATE TABLE prix_produit(
+                             id_prix_produit VARCHAR(50)  default 'PPR00'||nextval('seq_prix_produit'),
+                             prix_unitaire NUMERIC(15,2)   NOT NULL,
+                             date_prix DATE NOT NULL,
+                             id_produit VARCHAR(100)  NOT NULL,
+                             PRIMARY KEY(id_prix_produit),
+                             FOREIGN KEY(id_produit) REFERENCES produit(id_produit)
+);

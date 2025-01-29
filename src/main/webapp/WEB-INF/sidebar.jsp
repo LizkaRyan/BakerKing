@@ -7,6 +7,7 @@
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
+
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#production" aria-expanded="false" aria-controls="ui-basic">
                 <i class="icon-layout menu-icon"></i>
@@ -20,6 +21,7 @@
                 </ul>
             </div>
         </li>
+
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#achat" aria-expanded="false" aria-controls="ui-basic">
                 <i class="icon-layout menu-icon"></i>
@@ -33,6 +35,7 @@
                 </ul>
             </div>
         </li>
+
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#vente" aria-expanded="false" aria-controls="form-elements">
                 <i class="icon-columns menu-icon"></i>
@@ -49,6 +52,21 @@
 
             </div>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#produit" aria-expanded="false" aria-controls="ui-basic">
+                <i class="icon-layout menu-icon"></i>
+                <span class="menu-title">Produit</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="produit">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="/produit/historique/prix?idProduit=PRD001">Historique</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="/produit/prix">Modification Prix</a></li>
+                </ul>
+            </div>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#recommandation" aria-expanded="false" aria-controls="ui-basic">
                 <i class="icon-layout menu-icon"></i>
