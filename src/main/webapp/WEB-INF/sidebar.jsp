@@ -80,5 +80,18 @@
                 </ul>
             </div>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#administration" aria-expanded="false" aria-controls="ui-basic">
+                <i class="icon-settings menu-icon"></i>
+                <span class="menu-title">Administration</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="administration">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="/vendeur/gestion-roles">Gestion des rôles</a></li>
+                </ul>
+            </div>
+        </li>
     </ul>
 </nav>

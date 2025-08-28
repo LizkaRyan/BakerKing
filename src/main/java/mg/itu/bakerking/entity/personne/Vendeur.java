@@ -17,4 +17,8 @@ public class Vendeur {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_genre")
     private Genre genre;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private Role role = Role.USER; // Default role is USER
 }
