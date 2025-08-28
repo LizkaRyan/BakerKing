@@ -7,6 +7,8 @@ Ce système permet de gérer les rôles des collaborateurs (vendeurs) dans l'app
 - **USER** : Utilisateur standard (rôle par défaut)
 - **ADMIN** : Administrateur avec privilèges étendus
 
+![Interface de gestion des rôles](https://github.com/user-attachments/assets/b08e40b9-3e3a-4abb-92c1-cb12969feb84)
+
 ## Comment utiliser le système
 
 ### 1. Accès à la gestion des rôles
